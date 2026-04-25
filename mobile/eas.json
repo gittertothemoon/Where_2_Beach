@@ -36,6 +36,9 @@
       "env": {
         "EXPO_PUBLIC_BASE_URL": "https://where2beach.com",
         "EXPO_PUBLIC_API_TIMEOUT_MS": "12000"
+      },
+      "android": {
+        "buildType": "app-bundle"
       }
     }
   },
@@ -43,6 +46,11 @@
     "production": {
       "ios": {
         "ascAppId": "6760668956"
+      },
+      "android": {
+        "track": "internal",
+        "releaseStatus": "draft",
+        "serviceAccountKeyPath": "../google-play-service-account.json"
       }
     }
   }
