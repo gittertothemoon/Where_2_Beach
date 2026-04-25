@@ -7,7 +7,20 @@
       {
         "appIDs": ["YCA462KN4T.com.where2beach.mobile"],
         "components": [
-          { "/": "/register/*" }
+          { "/": "/landing/*", "exclude": true },
+          { "/": "/legal/*", "exclude": true },
+          { "/": "/privacy/*", "exclude": true },
+          { "/": "/terms/*", "exclude": true },
+          { "/": "/cookie-policy/*", "exclude": true },
+          { "/": "/.well-known/*", "exclude": true },
+          { "/": "/api/*", "exclude": true },
+          { "/": "/assets/*", "exclude": true },
+          { "/": "/og/*", "exclude": true },
+          { "/": "/icons/*", "exclude": true },
+          { "/": "/sequence/*", "exclude": true },
+          { "/": "/app/*" },
+          { "/": "/register/*" },
+          { "/": "/" }
         ]
       }
     ]
