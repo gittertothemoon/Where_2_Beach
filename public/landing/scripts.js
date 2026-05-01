@@ -214,14 +214,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const clamp01 = (value) => Math.min(1, Math.max(0, value));
         const PROGRESS_EPSILON = 0.0001;
+        // Both viewports drive 120 logical frames. Mobile sources every-other
+        // frame from the 240-frame asset bundle (logical i → file 2*i).
         const DESKTOP_COUNT = 120;
-        const MOBILE_COUNT = 240;
-        const DESKTOP_INITIAL_FRAMES = 4;
-        const MOBILE_INITIAL_FRAMES = 6;
+        const MOBILE_COUNT = 120;
+        const MOBILE_SOURCE_STRIDE = 2;
+        // First-pass stride: load every Nth frame so the user gets a coherent
+        // preview of the whole sequence almost immediately.
+        const FIRST_PASS_STRIDE = 16;
+        const REFINE_STRIDES = [8, 4, 2, 1];
 
         let isMobileView = window.innerWidth < 768;
         let frames = [];
         let loadedCount = 0;
+        let firstPassTotal = 1;
         let lastDrawKey = '';
         let lastDrawnFrameIndex = 0;
         let scrollDirection = 0;
@@ -243,8 +249,28 @@ document.addEventListener('DOMContentLoaded', () => {
         })).filter((item) => item.range.length === 4);
 
         const getActiveFrameCount = () => (isMobileView ? MOBILE_COUNT : DESKTOP_COUNT);
-        const getInitialFrameCount = () => (isMobileView ? MOBILE_INITIAL_FRAMES : DESKTOP_INITIAL_FRAMES);
         const getSequencePath = () => (isMobileView ? '/sequence/mobile' : '/sequence');
+        const getSourceFrameIndex = (logicalIndex) => (
+            isMobileView ? logicalIndex * MOBILE_SOURCE_STRIDE : logicalIndex
+        );
+
+        const buildStrideIndexes = (total, stride) => {
+            const out = [];
+            for (let i = 0; i < total; i += stride) out.push(i);
+            if (out[out.length - 1] !== total - 1) out.push(total - 1);
+            return out;
+        };
+
+        const collectMissing = (total, stride) => {
+            const out = [];
+            for (let i = 0; i < total; i += stride) {
+                if (!frames[i]) out.push(i);
+            }
+            if (!frames[total - 1] && (total - 1) % stride !== 0) {
+                out.push(total - 1);
+            }
+            return out;
+        };
 
         const resolveFrameForDirection = (frameList, targetIndex, direction, fallbackIndex) => {
             const direct = frameList[targetIndex];
@@ -274,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const setLoaderProgress = () => {
             if (!progressEl) return;
-            const readyTarget = getInitialFrameCount();
+            const readyTarget = Math.max(1, firstPassTotal);
             const percent = Math.round((Math.min(loadedCount, readyTarget) / readyTarget) * 100);
             progressEl.textContent = `${percent}%`;
         };
@@ -420,25 +446,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const loadFrameRange = async ({ version, start, end, concurrency, sequencePath }) => {
-            let nextIndex = start;
+        const loadFrameList = async ({ version, indexes, concurrency, sequencePath }) => {
+            let cursor = 0;
 
-            const loadSingle = (index) => new Promise((resolve) => {
+            const loadSingle = (logicalIndex) => new Promise((resolve) => {
                 if (version !== loadVersion) {
                     resolve();
                     return;
                 }
-                if (frames[index]) {
+                if (frames[logicalIndex]) {
                     resolve();
                     return;
                 }
 
+                const sourceIndex = getSourceFrameIndex(logicalIndex);
                 const image = new Image();
                 image.decoding = 'async';
-                image.src = `${sequencePath}/frame_${index}.webp`;
+                if ('fetchPriority' in image) {
+                    image.fetchPriority = logicalIndex === 0 ? 'high' : 'low';
+                }
+                image.src = `${sequencePath}/frame_${sourceIndex}.webp`;
                 image.onload = () => {
-                    if (version === loadVersion && !frames[index]) {
-                        frames[index] = image;
+                    if (version === loadVersion && !frames[logicalIndex]) {
+                        frames[logicalIndex] = image;
                         loadedCount += 1;
                         setLoaderProgress();
                         requestTick();
@@ -452,10 +482,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const worker = async () => {
                 while (version === loadVersion) {
-                    const index = nextIndex;
-                    nextIndex += 1;
-                    if (index >= end) return;
-                    await loadSingle(index);
+                    const i = cursor;
+                    cursor += 1;
+                    if (i >= indexes.length) return;
+                    await loadSingle(indexes[i]);
                 }
             };
 
@@ -469,21 +499,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const activeCount = getActiveFrameCount();
             const sequencePath = getSequencePath();
-            const initialCount = Math.min(getInitialFrameCount(), activeCount);
             progressiveLoadStarted = false;
             loadedCount = 0;
             frames = Array.from({ length: activeCount }, () => null);
             lastDrawKey = '';
             lastDrawnFrameIndex = 0;
 
+            const firstPassIndexes = buildStrideIndexes(activeCount, FIRST_PASS_STRIDE);
+            firstPassTotal = firstPassIndexes.length;
+
             setLoaderProgress();
             showLoader();
 
-            await loadFrameRange({
+            await loadFrameList({
                 version,
-                start: 0,
-                end: initialCount,
-                concurrency: isMobileView ? 3 : 2,
+                indexes: firstPassIndexes,
+                concurrency: isMobileView ? 4 : 6,
                 sequencePath,
             });
 
@@ -498,16 +529,21 @@ document.addEventListener('DOMContentLoaded', () => {
             progressiveLoadStarted = true;
             const version = loadVersion;
             const activeCount = getActiveFrameCount();
-            const initialCount = Math.min(getInitialFrameCount(), activeCount);
             const sequencePath = getSequencePath();
-            await loadFrameRange({
-                version,
-                start: initialCount,
-                end: activeCount,
-                concurrency: 2,
-                sequencePath,
-            });
-            drawFrame();
+
+            for (const stride of REFINE_STRIDES) {
+                if (version !== loadVersion) return;
+                const indexes = collectMissing(activeCount, stride);
+                if (indexes.length === 0) continue;
+                await loadFrameList({
+                    version,
+                    indexes,
+                    concurrency: isMobileView ? 4 : 6,
+                    sequencePath,
+                });
+                if (version !== loadVersion) return;
+                drawFrame();
+            }
             applyBeatStyles();
         };
 

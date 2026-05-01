@@ -19,6 +19,10 @@
     <meta name="twitter:description" content="Scarica Where2Beach su App Store. Affollamento, meteo e segnalazioni live della community.">
     <meta name="twitter:image" content="https://where2beach.com/og/og-default.jpg">
 
+    <!-- Preload first radar-sequence frame so it is on the wire before scripts.js parses -->
+    <link rel="preload" as="image" href="/sequence/frame_0.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/sequence/mobile/frame_0.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
+
     <!-- Google Fonts: Poppins for a modern, rounded, friendly look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
