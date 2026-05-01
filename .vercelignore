@@ -3,7 +3,7 @@ w2b-hero/node_modules
 .claude
 .cache
 dist
-mobile
+/mobile
 api/beach-enrich/run.ts
 api/beach-profile.ts
 api/analytics.ts
