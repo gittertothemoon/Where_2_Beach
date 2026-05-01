@@ -32,6 +32,7 @@
     <script src="tailwind.config.js"></script>
     <script src="/legal/runtime.js" defer></script>
 
+
     <link rel="stylesheet" href="styles.css">
     <script type="application/ld+json">
         {
@@ -114,140 +115,138 @@
 </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero-gradient min-h-[100svh] flex items-center pt-32 md:pt-48 pb-20 md:pb-32 relative overflow-hidden">
-        <!-- Mobile Background Image & Overlay -->
-        <div class="absolute inset-0 z-0 md:hidden">
-            <img src="hero_image.png" alt="Sfondo Mobile" class="w-full h-full object-cover object-center">
-            <div class="absolute inset-0 bg-[#003553]/80 mix-blend-multiply"></div>
-            <!-- Solid overlay for mobile readability -->
-        </div>
+    <section id="hero" class="hero-bg relative min-h-[100svh] flex items-center pt-28 md:pt-32 pb-16 md:pb-24 overflow-hidden">
+        <!-- Mesh gradient blobs -->
+        <div class="hero-mesh hero-mesh-1" aria-hidden="true"></div>
+        <div class="hero-mesh hero-mesh-2" aria-hidden="true"></div>
+        <div class="hero-mesh hero-mesh-3" aria-hidden="true"></div>
+        <!-- Topographic contour lines -->
+        <div class="hero-topo" aria-hidden="true"></div>
+        <!-- Film grain -->
+        <div class="hero-grain" aria-hidden="true"></div>
 
-        <!-- Floating abstract shapes -->
-        <div
-            class="absolute top-1/4 left-10 w-72 h-72 bg-onda opacity-30 rounded-full blur-[80px] animate-blob mix-blend-screen z-0">
-        </div>
-        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-corallo opacity-30 rounded-full blur-[100px] animate-blob mix-blend-screen z-0"
-            style="animation-delay: 2s;"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid md:grid-cols-12 gap-12 md:gap-10 items-center">
                 <!-- Text Content -->
-                <div class="text-white text-center md:text-left space-y-8">
-                    <div
-                        class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm font-semibold tracking-wide border border-white/20 shadow-lg">
-                        <span class="relative flex h-3 w-3">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-corallo opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-3 w-3 bg-corallo"></span>
-                        </span>
-                        Ora disponibile su App Store — gratis
-                    </div>
-
-                    <h1 class="text-5xl md:text-6xl lg:text-[5.5rem] font-black leading-[1.05] tracking-tighter">
-                        Basta vacanze <br />
-                        <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-corallo to-[#FFB154]">rovinate.</span>
+                <div class="md:col-span-7 text-white text-center md:text-left">
+                    <span class="hero-eyebrow">
+                        <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+                        <span>Live in Italia</span>
+                        <span class="hero-eyebrow-sep" aria-hidden="true"></span>
+                        <span class="hero-eyebrow-meta">migliaia di spiagge mappate</span>
+                    </span>
+                    <h1 class="hero-headline mt-7">
+                        Mentre tu sei<br>
+                        in macchina,<br>
+                        <span class="hero-headline-accent">qualcuno è già lì.</span>
                     </h1>
-
-                    <p class="text-lg md:text-xl font-normal text-onda/90 leading-relaxed max-w-lg mx-auto md:mx-0">
-                        Controlla in anticipo affollamento, meteo e segnalazioni della community. Parti solo quando la
-                        spiaggia è davvero quella giusta per te.
+                    <p class="hero-lede mt-7 max-w-xl mx-auto md:mx-0">
+                        Where2Beach ti dice <em>com'è</em> la spiaggia adesso&nbsp;— affollamento, meteo, segnalazioni. Da chi ci sta camminando, non da un algoritmo.
                     </p>
 
-                    <!-- CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
-                        <!-- App Store Button — primary CTA -->
+                    <div class="mt-10 flex flex-col sm:flex-row items-center md:items-start gap-5 justify-center md:justify-start">
                         <a href="https://apps.apple.com/it/app/where2beach/id6760668956"
                             target="_blank" rel="noopener noreferrer"
                             data-cta-id="hero_store_ios"
                             data-cta-section="hero"
                             data-cta-variant="primary"
-                            class="flex items-center justify-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-[2rem] hover:bg-white/90 transition-all hover:-translate-y-1 shadow-glass group font-bold">
-                            <svg class="w-8 h-8 fill-current group-hover:text-mare transition-colors"
-                                viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+                            class="inline-flex items-center gap-3 bg-white text-gray-900 px-7 py-3.5 rounded-full hover:bg-white/90 transition-colors font-semibold">
+                            <svg class="w-7 h-7 fill-current" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
                             </svg>
                             <div class="text-left">
-                                <div class="text-[10px] leading-tight text-gray-500 font-medium">Scarica su</div>
+                                <div class="text-[10px] uppercase tracking-wider text-gray-500 leading-tight">Scarica su</div>
                                 <div class="text-base font-bold leading-tight">App Store</div>
                             </div>
                         </a>
-                    </div>
-
-                    <div class="max-w-lg mx-auto md:mx-0">
-                        <p class="text-sm text-onda/90 font-medium">
-                            Su Android? Lascia la tua email — ti avvisiamo noi appena è disponibile.
-                        </p>
-                        <form id="landing-email-form-hero" data-signup-form
-                            class="mt-4 flex flex-col sm:flex-row gap-3 max-w-xl relative z-20">
-                            <input type="email" data-signup-input name="email" placeholder="La tua email..." required
-                                class="email-input flex-1 bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-onda/50 px-6 py-4 rounded-[2rem] focus:outline-none focus:ring-2 focus:ring-corallo transition-all">
-                            <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"
-                                class="hidden">
-                            <button type="submit" data-signup-submit
-                                data-cta-id="hero_signup_submit"
-                                data-cta-section="hero"
-                                data-cta-variant="primary"
-                                class="bg-corallo text-white px-8 py-4 rounded-[2rem] font-bold shadow-glow-corallo hover:bg-corallo-hover transition-all hover:-translate-y-1 whitespace-nowrap">
-                                Avvisami su Android
-                            </button>
-                        </form>
-                        <p data-signup-feedback class="mt-3 text-sm text-onda/90 min-h-[1.25rem]" aria-live="polite"></p>
-                        <p class="text-xs text-onda/70">Niente spam. Solo la notifica quando esce su Android.</p>
-                    </div>
-
-                    <!-- Seasonal Urgency Countdown -->
-                    <div id="summer-countdown" class="countdown-container mt-8 relative hidden lg:block">
-                        <div class="inline-flex flex-col items-center gap-3">
-                            <div class="flex items-center gap-2 text-onda/70 text-xs font-bold uppercase tracking-[0.2em]">
-                                <span class="w-5 h-px bg-gradient-to-r from-transparent to-onda/40"></span>
-                                <span>☀️ L'estate 2026 inizia tra</span>
-                                <span class="w-5 h-px bg-gradient-to-l from-transparent to-onda/40"></span>
-                            </div>
-                            <div class="flex gap-3" id="countdown-timer">
-                                <div class="cd-tile group">
-                                    <span id="cd-days" class="cd-value text-transparent bg-clip-text bg-gradient-to-b from-corallo to-[#FFB154]">--</span>
-                                    <span class="cd-label">giorni</span>
-                                </div>
-                                <div class="cd-separator">:</div>
-                                <div class="cd-tile group">
-                                    <span id="cd-hours" class="cd-value">--</span>
-                                    <span class="cd-label">ore</span>
-                                </div>
-                                <div class="cd-separator">:</div>
-                                <div class="cd-tile group">
-                                    <span id="cd-mins" class="cd-value">--</span>
-                                    <span class="cd-label">min</span>
-                                </div>
-                                <div class="cd-separator">:</div>
-                                <div class="cd-tile group">
-                                    <span id="cd-secs" class="cd-value cd-secs-active">--</span>
-                                    <span class="cd-label">sec</span>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="#android"
+                            class="text-white/70 hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white transition-colors">
+                            Su Android? Avvisami quando esce →
+                        </a>
                     </div>
                 </div>
 
-                <!-- Graphic / Mascot -->
-                <div class="hidden md:flex justify-center relative animate-float">
-                    <div class="w-72 h-72 lg:w-[32rem] lg:h-[32rem] relative z-10 flex items-center justify-center">
-                        <!-- Glowing aura behind image -->
-                        <div class="absolute inset-0 bg-white/10 rounded-full blur-2xl"></div>
-                        <img src="hero_image.png" alt="Cinematic Hero"
-                            class="w-full h-full object-cover rounded-[3rem] shadow-2xl hover:scale-105 transition-transform duration-700 relative z-20 border-[6px] border-white/20">
+                <!-- Phone Mockup -->
+                <div class="md:col-span-5 flex justify-center md:justify-end">
+                    <div class="phone-mockup-wrap">
+                        <div class="phone-mockup w-[16rem] sm:w-[18rem] lg:w-[20rem] aspect-[9/19]">
+                            <span class="phone-mockup-buttons" aria-hidden="true"></span>
+                            <img src="app-ui-mobile.jpg" alt="Where2Beach app screenshot" loading="eager">
+                        </div>
+                        <span class="phone-mockup-floor" aria-hidden="true"></span>
+                        <span class="phone-mockup-badge" aria-hidden="true">
+                            <span class="phone-mockup-badge-dot"></span>
+                            Live
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SVG Bottom Wave for smooth transition -->
+        <!-- SVG Bottom Wave -->
         <div class="absolute bottom-[-1px] left-0 w-full overflow-hidden leading-none z-0">
             <svg class="relative block w-full h-[60px] md:h-[120px]" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 1440 120" preserveAspectRatio="none">
                 <path d="M0,64 C480,120 960,8 1440,64 L1440,120 L0,120 Z" fill="#FDFBF7"></path>
             </svg>
+        </div>
+    </section>
+
+    <!-- Android Waitlist + Countdown -->
+    <section id="android" class="bg-sabbia pt-12 md:pt-16 pb-4 px-4 relative z-20">
+        <div class="max-w-3xl mx-auto text-center">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-corallo">Android</p>
+            <h2 class="mt-3 text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+                Lascia la tua email, ti avvisiamo all'uscita.
+            </h2>
+            <form id="landing-email-form-hero" data-signup-form
+                class="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl mx-auto relative z-20">
+                <input type="email" data-signup-input name="email" placeholder="La tua email..." required
+                    class="email-input flex-1 bg-white border border-gray-200 text-gray-900 placeholder-gray-400 px-6 py-4 rounded-full focus:outline-none focus:ring-2 focus:ring-corallo transition-all">
+                <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+                <button type="submit" data-signup-submit
+                    data-cta-id="hero_signup_submit"
+                    data-cta-section="hero"
+                    data-cta-variant="primary"
+                    class="bg-corallo text-white px-8 py-4 rounded-full font-bold hover:bg-corallo-hover transition-colors whitespace-nowrap">
+                    Avvisami
+                </button>
+            </form>
+            <p data-signup-feedback class="mt-3 text-sm text-gray-600 min-h-[1.25rem]" aria-live="polite"></p>
+            <p class="text-xs text-gray-500">Niente spam. Solo la notifica quando esce su Android.</p>
+
+            <!-- Seasonal Urgency Countdown -->
+            <div id="summer-countdown" class="countdown-container mt-10 relative hidden lg:block">
+                <div class="inline-flex flex-col items-center gap-3">
+                    <div class="flex items-center gap-2 text-gray-500 text-xs font-bold uppercase tracking-[0.2em]">
+                        <span class="w-5 h-px bg-gradient-to-r from-transparent to-gray-300"></span>
+                        <span>☀️ L'estate 2026 inizia tra</span>
+                        <span class="w-5 h-px bg-gradient-to-l from-transparent to-gray-300"></span>
+                    </div>
+                    <div class="flex gap-3" id="countdown-timer">
+                        <div class="cd-tile group">
+                            <span id="cd-days" class="cd-value text-transparent bg-clip-text bg-gradient-to-b from-corallo to-[#FFB154]">--</span>
+                            <span class="cd-label">giorni</span>
+                        </div>
+                        <div class="cd-separator">:</div>
+                        <div class="cd-tile group">
+                            <span id="cd-hours" class="cd-value">--</span>
+                            <span class="cd-label">ore</span>
+                        </div>
+                        <div class="cd-separator">:</div>
+                        <div class="cd-tile group">
+                            <span id="cd-mins" class="cd-value">--</span>
+                            <span class="cd-label">min</span>
+                        </div>
+                        <div class="cd-separator">:</div>
+                        <div class="cd-tile group">
+                            <span id="cd-secs" class="cd-value cd-secs-active">--</span>
+                            <span class="cd-label">sec</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -330,8 +329,18 @@
                 <!-- Step 1 -->
                 <div class="reveal stagger-1 group relative bg-gradient-to-br from-white to-gray-50/80 rounded-[2.5rem] p-8 md:p-10 border border-gray-100 hover:border-mare/30 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-2 text-center">
                     <div class="absolute top-6 right-6 text-6xl md:text-7xl font-black text-gray-100 group-hover:text-mare/10 transition-colors select-none">1</div>
-                    <div class="w-16 h-16 mx-auto rounded-[1.5rem] bg-gradient-to-br from-mare to-mare-dark text-white flex items-center justify-center mb-6 shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <div class="w2b-icon-tile mx-auto mb-6 group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-300">
+                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                            <path d="M6 14L18 10L30 14L42 10V34L30 38L18 34L6 38V14Z" fill="#90E0EF"/>
+                            <path d="M6 14L18 10L30 14L42 10V34L30 38L18 34L6 38V14Z" stroke="#0077B6" stroke-width="1.6" stroke-linejoin="round"/>
+                            <path d="M18 10V34M30 14V38" stroke="#0077B6" stroke-width="1" stroke-dasharray="2 2" opacity="0.55"/>
+                            <ellipse cx="24" cy="38" rx="6" ry="1.6" fill="#000" opacity="0.18"/>
+                            <path d="M24 12C19.3 12 15.5 15.8 15.5 20.5C15.5 26.5 24 36 24 36C24 36 32.5 26.5 32.5 20.5C32.5 15.8 28.7 12 24 12Z" fill="#FF6B47"/>
+                            <path d="M24 12C19.3 12 15.5 15.8 15.5 20.5C15.5 26.5 24 36 24 36C24 36 32.5 26.5 32.5 20.5C32.5 15.8 28.7 12 24 12Z" stroke="#C8421F" stroke-width="1.4" stroke-linejoin="round"/>
+                            <path d="M24 12C19.3 12 15.5 15.8 15.5 20.5C18 17 21 16 24 16C24 16 24 13.5 24 12Z" fill="white" opacity="0.25"/>
+                            <circle cx="24" cy="20" r="3.4" fill="white"/>
+                            <circle cx="24" cy="20" r="3.4" stroke="#C8421F" stroke-width="1"/>
+                        </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 tracking-tight mb-3">Cerca la tua spiaggia</h3>
                     <p class="text-gray-500 font-medium leading-relaxed text-sm md:text-base">Apri l'app, cerca la spiaggia dove vuoi andare o esplora quelle vicine a te sulla mappa.</p>
@@ -340,8 +349,18 @@
                 <!-- Step 2 -->
                 <div class="reveal stagger-2 group relative bg-gradient-to-br from-white to-gray-50/80 rounded-[2.5rem] p-8 md:p-10 border border-gray-100 hover:border-corallo/30 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-2 text-center">
                     <div class="absolute top-6 right-6 text-6xl md:text-7xl font-black text-gray-100 group-hover:text-corallo/10 transition-colors select-none">2</div>
-                    <div class="w-16 h-16 mx-auto rounded-[1.5rem] bg-gradient-to-br from-corallo to-corallo-hover text-white flex items-center justify-center mb-6 shadow-md group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    <div class="w2b-icon-tile mx-auto mb-6 group-hover:scale-105 group-hover:rotate-2 transition-transform duration-300">
+                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                            <rect x="11" y="5" width="26" height="38" rx="5.5" fill="#023E8A"/>
+                            <rect x="11" y="5" width="26" height="38" rx="5.5" stroke="#001F3D" stroke-width="1.4"/>
+                            <rect x="13.5" y="9.5" width="21" height="29" rx="2.5" fill="#90E0EF"/>
+                            <rect x="20.5" y="6.5" width="7" height="2" rx="1" fill="#001F3D"/>
+                            <circle cx="24" cy="24" r="11" fill="#FF6B47" opacity="0.18"/>
+                            <circle cx="24" cy="24" r="7.5" fill="#FF6B47" opacity="0.32"/>
+                            <circle cx="24" cy="24" r="4" fill="#FF6B47"/>
+                            <circle cx="24" cy="24" r="4" stroke="#C8421F" stroke-width="1.2"/>
+                            <circle cx="22.5" cy="22.5" r="1.2" fill="white" opacity="0.7"/>
+                        </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 tracking-tight mb-3">Guarda com'è adesso</h3>
                     <p class="text-gray-500 font-medium leading-relaxed text-sm md:text-base">Vedi in tempo reale quanto è affollata, com'è il meteo, se ci sono meduse o problemi di parcheggio.</p>
@@ -350,8 +369,26 @@
                 <!-- Step 3 -->
                 <div class="reveal stagger-3 group relative bg-gradient-to-br from-white to-gray-50/80 rounded-[2.5rem] p-8 md:p-10 border border-gray-100 hover:border-mare/30 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-2 text-center">
                     <div class="absolute top-6 right-6 text-6xl md:text-7xl font-black text-gray-100 group-hover:text-mare/10 transition-colors select-none">3</div>
-                    <div class="w-16 h-16 mx-auto rounded-[1.5rem] bg-gradient-to-br from-onda to-mare text-white flex items-center justify-center mb-6 shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="w2b-icon-tile mx-auto mb-6 group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-300">
+                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                            <circle cx="34" cy="14" r="7.5" fill="#FFD93D"/>
+                            <circle cx="34" cy="14" r="7.5" stroke="#E0A21B" stroke-width="1.2"/>
+                            <g stroke="#E0A21B" stroke-width="1.4" stroke-linecap="round">
+                                <path d="M34 3.5v2"/>
+                                <path d="M34 22.5v2"/>
+                                <path d="M22.5 14h2"/>
+                                <path d="M43.5 14h2"/>
+                                <path d="M26.5 6.5l1.5 1.5"/>
+                                <path d="M40 20l1.5 1.5"/>
+                            </g>
+                            <ellipse cx="24" cy="40" rx="14" ry="2" fill="#000" opacity="0.15"/>
+                            <path d="M24 10C13 10 6 21 6 25H42C42 21 35 10 24 10Z" fill="#FF6B47"/>
+                            <path d="M24 10C13 10 6 21 6 25H42C42 21 35 10 24 10Z" stroke="#C8421F" stroke-width="1.5" stroke-linejoin="round"/>
+                            <path d="M14 25C14 19 18 13 24 13M34 25C34 19 30 13 24 13" stroke="#C8421F" stroke-width="1.1" opacity="0.45"/>
+                            <path d="M24 13C16 13 11 19 8 25H40C37 19 32 13 24 13Z" fill="white" opacity="0.18"/>
+                            <rect x="22.7" y="25" width="2.6" height="14" rx="0.8" fill="#7C2D12"/>
+                            <path d="M4 39C8 37 12 37 16 39C20 41 24 41 28 39C32 37 36 37 40 39C42 40 44 40 44 39" stroke="#0077B6" stroke-width="2.2" stroke-linecap="round"/>
+                        </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 tracking-tight mb-3">Goditi la giornata</h3>
                     <p class="text-gray-500 font-medium leading-relaxed text-sm md:text-base">Parti solo quando ne vale la pena. Niente stress, niente sorprese. Solo mare perfetto.</p>
@@ -431,29 +468,58 @@
                         </div>
                         <!-- Visual Signal Type Badges -->
                         <div class="signal-badges-grid pl-0 md:pl-[4.75rem]">
-                            <span class="signal-badge" style="--badge-delay: 0s">
-                                <span class="signal-badge-dot signal-badge-dot-red"></span>
-                                <span class="text-red-800">Affollamento</span>
+                            <span class="signal-badge signal-badge--coral" style="--badge-delay: 0s">
+                                <span class="signal-badge-glyph">
+                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <circle cx="8" cy="7" r="2.6" fill="currentColor"/>
+                                        <path d="M3.5 17c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5v1H3.5v-1z" fill="currentColor"/>
+                                        <circle cx="16" cy="7" r="2.6" fill="currentColor" opacity="0.55"/>
+                                        <path d="M11.5 17c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5v1h-9v-1z" fill="currentColor" opacity="0.55"/>
+                                    </svg>
+                                </span>
+                                <span>Affollamento</span>
                             </span>
-                            <span class="signal-badge" style="--badge-delay: 0.06s">
-                                <span class="signal-badge-dot signal-badge-dot-purple"></span>
-                                <span class="text-purple-800">Meduse</span>
+                            <span class="signal-badge signal-badge--purple" style="--badge-delay: 0.06s">
+                                <span class="signal-badge-glyph">
+                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M5 11C5 7 8 4 12 4s7 3 7 7v2H5v-2z" fill="currentColor"/>
+                                        <path d="M5 13c1.2 0 1.2 1.6 2.4 1.6S8.6 13 9.8 13s1.2 1.6 2.4 1.6S13.4 13 14.6 13s1.2 1.6 2.4 1.6S18.2 13 19 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+                                        <path d="M8 16l-1 4M11 16v4M13 16v4M16 16l1 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+                                        <circle cx="9.5" cy="9" r="0.9" fill="white" opacity="0.9"/>
+                                        <circle cx="14" cy="9" r="0.9" fill="white" opacity="0.9"/>
+                                    </svg>
+                                </span>
+                                <span>Meduse</span>
                             </span>
-                            <span class="signal-badge" style="--badge-delay: 0.12s">
-                                <span class="signal-badge-dot signal-badge-dot-cyan"></span>
-                                <span class="text-cyan-800">Mare Mosso</span>
+                            <span class="signal-badge signal-badge--cyan" style="--badge-delay: 0.12s">
+                                <span class="signal-badge-glyph">
+                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M2 11c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                        <path d="M2 16c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
+                                        <path d="M2 21c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+                                    </svg>
+                                </span>
+                                <span>Mare mosso</span>
                             </span>
-                            <span class="signal-badge" style="--badge-delay: 0.18s">
-                                <span class="signal-badge-dot signal-badge-dot-amber"></span>
-                                <span class="text-amber-800">Parcheggio</span>
+                            <span class="signal-badge signal-badge--teal" style="--badge-delay: 0.18s">
+                                <span class="signal-badge-glyph">
+                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M3 9h11a3 3 0 100-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                        <path d="M3 15h15a3.5 3.5 0 110 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                        <path d="M3 12h7" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+                                    </svg>
+                                </span>
+                                <span>Vento</span>
                             </span>
-                            <span class="signal-badge" style="--badge-delay: 0.24s">
-                                <span class="signal-badge-dot signal-badge-dot-teal"></span>
-                                <span class="text-teal-800">Vento</span>
-                            </span>
-                            <span class="signal-badge" style="--badge-delay: 0.3s">
-                                <span class="signal-badge-dot signal-badge-dot-green"></span>
-                                <span class="text-green-800">Pulizia</span>
+                            <span class="signal-badge signal-badge--green" style="--badge-delay: 0.24s">
+                                <span class="signal-badge-glyph">
+                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" fill="currentColor"/>
+                                        <path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z" fill="currentColor" opacity="0.6"/>
+                                        <path d="M6 17l.6 1.6L8.2 19l-1.6.6L6 21l-.6-1.4L4 19l1.4-.4L6 17z" fill="currentColor" opacity="0.5"/>
+                                    </svg>
+                                </span>
+                                <span>Pulizia</span>
                             </span>
                         </div>
                     </div>
@@ -494,14 +560,16 @@
                     <div
                         class="absolute top-0 right-0 w-32 h-32 bg-onda/10 rounded-bl-full -z-10 group-hover:bg-onda/20 transition-colors">
                     </div>
-                    <div
-                        class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-onda to-mare text-white flex items-center justify-center mb-6 shadow-md drop-shadow-sm">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <div class="w2b-icon-tile mb-6">
+                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                            <ellipse cx="24" cy="40" rx="14" ry="2.4" stroke="#0077B6" stroke-width="1.4" stroke-dasharray="3 2.5" opacity="0.5" fill="none"/>
+                            <ellipse cx="24" cy="40" rx="8" ry="1.4" fill="#0077B6" opacity="0.3"/>
+                            <path d="M24 4C17 4 11.5 9.5 11.5 16.5C11.5 26 24 40 24 40C24 40 36.5 26 36.5 16.5C36.5 9.5 31 4 24 4Z" fill="#FF6B47"/>
+                            <path d="M24 4C17 4 11.5 9.5 11.5 16.5C11.5 26 24 40 24 40C24 40 36.5 26 36.5 16.5C36.5 9.5 31 4 24 4Z" stroke="#C8421F" stroke-width="1.5" stroke-linejoin="round"/>
+                            <path d="M24 4C17 4 11.5 9.5 11.5 16.5C14 11 18 9 24 9C24 9 24 6 24 4Z" fill="white" opacity="0.25"/>
+                            <circle cx="24" cy="16.5" r="5" fill="white"/>
+                            <circle cx="24" cy="16.5" r="5" stroke="#C8421F" stroke-width="1.2"/>
+                            <circle cx="24" cy="16.5" r="2.2" fill="#FF6B47"/>
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 tracking-tighter">Mappe & Segnalazioni</h3>
@@ -517,11 +585,17 @@
                     <div
                         class="absolute top-0 right-0 w-32 h-32 bg-corallo/10 rounded-bl-full -z-10 group-hover:bg-corallo/20 transition-colors">
                     </div>
-                    <div
-                        class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-corallo-light to-corallo text-white flex items-center justify-center mb-6 shadow-md drop-shadow-sm">
-                        <svg class="w-8 h-8 text-corallo-hover" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    <div class="w2b-icon-tile mb-6">
+                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                            <circle cx="24" cy="24" r="20" fill="#FFD93D" opacity="0.35"/>
+                            <circle cx="24" cy="24" r="14.5" fill="#FFB154" opacity="0.55"/>
+                            <circle cx="24" cy="24" r="9" fill="#FF6B47" opacity="0.85"/>
+                            <circle cx="24" cy="24" r="4" fill="#C8421F"/>
+                            <circle cx="24" cy="24" r="4" stroke="white" stroke-width="1.2"/>
+                            <path d="M21 17C19 12 14 11 11 14" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.6" fill="none"/>
+                            <circle cx="11" cy="14" r="1.3" fill="white" opacity="0.7"/>
+                            <path d="M27 31C29 36 34 37 37 34" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.6" fill="none"/>
+                            <circle cx="37" cy="34" r="1.3" fill="white" opacity="0.7"/>
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 tracking-tighter">Heatmaps Predittive</h3>
@@ -537,12 +611,14 @@
                     <div
                         class="absolute top-0 right-0 w-32 h-32 bg-mare-dark/5 rounded-bl-full -z-10 group-hover:bg-mare-dark/10 transition-colors">
                     </div>
-                    <div
-                        class="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-gray-800 to-black text-white flex items-center justify-center mb-6 shadow-md drop-shadow-sm">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                            </path>
+                    <div class="w2b-icon-tile mb-6">
+                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                            <path d="M24 4L40 9.5V22C40 32.5 32.5 40 24 42C15.5 40 8 32.5 8 22V9.5L24 4Z" fill="#0077B6"/>
+                            <path d="M24 4L40 9.5V22C40 32.5 32.5 40 24 42C15.5 40 8 32.5 8 22V9.5L24 4Z" stroke="#001F3D" stroke-width="1.5" stroke-linejoin="round"/>
+                            <path d="M24 7.5L36.5 11.5V22C36.5 30.5 30.5 36.5 24 38.2V7.5Z" fill="#023E8A" opacity="0.7"/>
+                            <path d="M24 4L40 9.5V22C40 32.5 32.5 40 24 42V4Z" fill="white" opacity="0.08"/>
+                            <path d="M16 23L22 29L33 18" stroke="#FFD93D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 23L22 29L33 18" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 tracking-tighter">Dati verificati dalla community</h3>
@@ -568,17 +644,11 @@
 
                 <!-- Mockup Visuals -->
                 <div class="reveal-left relative mx-auto w-[280px] md:w-[320px] order-2 lg:order-1 mt-12 lg:mt-0">
-                    <div class="phone-mockup aspect-[9/19] flex flex-col bg-gray-50 relative">
-                        <!-- Notch -->
-                        <div class="phone-notch"></div>
-
-                        <!-- App UI Simulation -->
-                        <!-- App UI Simulation Image -->
-                        <div class="absolute inset-x-0 bottom-0 top-0 overflow-hidden" style="border-radius: 38px;">
-                            <img src="IMG_2092 (1).png" alt="Where2Beach App Screen"
-                                class="w-full h-full object-cover object-top">
-                        </div>
+                    <div class="phone-mockup aspect-[9/19]">
+                        <span class="phone-mockup-buttons" aria-hidden="true"></span>
+                        <img src="app-ui-mobile.jpg" alt="Where2Beach App Screen" loading="lazy">
                     </div>
+                    <span class="phone-mockup-floor" aria-hidden="true"></span>
 
                     <!-- Floating UI elements -->
                     <div class="absolute top-1/4 -left-8 md:-left-16 bg-white/90 backdrop-blur px-4 py-3 rounded-2xl shadow-xl border border-gray-100 animate-float text-sm font-bold flex items-center gap-3 z-30"
