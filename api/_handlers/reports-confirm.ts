@@ -78,7 +78,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ ok: false, error: "invalid_report_id" });
   }
 
-  type ConfirmFnRow = { ok?: unknown; error?: unknown };
+  type ConfirmFnRow = {
+    ok?: unknown;
+    error?: unknown;
+    awarded_points?: unknown;
+    points_balance?: unknown;
+  };
   const { data: fnData, error: fnError } = await supabase.rpc("confirm_beach_report", {
     p_confirmer_id: userId,
     p_report_id: reportId,
@@ -97,6 +102,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
     return res.status(400).json({ ok: false, error: errCode ?? "confirm_failed" });
   }
+
+  const awardedPoints =
+    typeof result.awarded_points === "number" && Number.isFinite(result.awarded_points)
+      ? Math.trunc(result.awarded_points)
+      : null;
+  const pointsBalance =
+    typeof result.points_balance === "number" && Number.isFinite(result.points_balance)
+      ? Math.trunc(result.points_balance)
+      : null;
 
   // Notify the reporter — best-effort, don't block the response
   void (async () => {
@@ -124,9 +138,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (!token) return;
 
       const CONFIRM_MESSAGES = [
-        "Qualcuno ha confermato la tua segnalazione! 🙌 Continua così.",
-        "La tua segnalazione è stata confermata da un altro utente! ✅",
-        "Ottimo lavoro! Un altro bagnante ha confermato la tua segnalazione 🏖️",
+        "Qualcuno ha confermato la tua segnalazione! 🙌 +2 pt per te.",
+        "La tua segnalazione è stata confermata da un altro utente. ✅ +2 pt accreditati.",
+        "Ottimo lavoro! Un altro bagnante ha confermato la tua segnalazione 🏖️ +2 pt.",
       ];
       const body = CONFIRM_MESSAGES[Math.floor(Math.random() * CONFIRM_MESSAGES.length)];
 
@@ -142,5 +156,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   })();
 
-  return res.status(200).json({ ok: true });
+  return res.status(200).json({
+    ok: true,
+    rewards: {
+      awardedPoints,
+      pointsBalance,
+    },
+  });
 }
