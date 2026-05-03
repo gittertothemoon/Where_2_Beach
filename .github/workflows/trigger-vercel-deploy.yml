@@ -2,19 +2,29 @@ name: trigger-vercel-deploy
 on:
   push:
     branches: [claude/trigger-deploy]
+permissions:
+  issues: write
 jobs:
   trigger:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Call Vercel Deploy Hook (verbose, both methods)
+      - name: Call Vercel Deploy Hook and report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -uo pipefail
-          echo "=== POST ==="
-          post=$(curl -sS -X POST -i \
-            "https://api.vercel.com/v1/integrations/deploy/prj_pF96W3Etp9dqURwKZaaBhoMKwvik/vDuEDdLX1E" || true)
-          echo "$post"
-          echo "=== GET ==="
-          get=$(curl -sS -i \
-            "https://api.vercel.com/v1/integrations/deploy/prj_pF96W3Etp9dqURwKZaaBhoMKwvik/vDuEDdLX1E" || true)
-          echo "$get"
+          status_code=$(curl -sS -o /tmp/body -w "%{http_code}" -X POST \
+            "https://api.vercel.com/v1/integrations/deploy/prj_pF96W3Etp9dqURwKZaaBhoMKwvik/vDuEDdLX1E")
+          body=$(cat /tmp/body)
+          echo "status=$status_code"
+          echo "body=$body"
+          gh issue comment 2 --repo gittertothemoon/where_2_beach \
+            --body "deploy-hook trigger result (run ${GITHUB_RUN_ID}): \`${status_code}\` body=\`${body}\`" \
+            || gh issue create --repo gittertothemoon/where_2_beach \
+                 --title "deploy-hook diagnostic ${GITHUB_RUN_ID}" \
+                 --body "status=${status_code} body=${body}"
+          if [ "$status_code" != "201" ] && [ "$status_code" != "200" ]; then
+            echo "::error::Hook returned $status_code: $body"
+            exit 1
+          fi
