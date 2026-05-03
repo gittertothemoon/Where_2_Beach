@@ -9,6 +9,10 @@
       "schedule": "0 18 * * *"
     },
     {
+      "path": "/api/notifications/cooldown-remind",
+      "schedule": "*/15 * * * *"
+    },
+    {
       "path": "/api/predictions-prune",
       "schedule": "30 3 * * *"
     },

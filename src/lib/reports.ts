@@ -306,13 +306,34 @@ export const submitSharedReport = async (input: {
   return { ok: true, report, rewards };
 };
 
+export type ConfirmReportRewards = {
+  awardedPoints: number | null;
+  pointsBalance: number | null;
+};
+
 export type ConfirmReportResult =
-  | { ok: true }
+  | { ok: true; rewards: ConfirmReportRewards }
   | { ok: false; code: "network" | "account_required" | "not_found" | "already_confirmed" | "cannot_confirm_own" | "unavailable" };
+
+const parseConfirmRewards = (value: unknown): ConfirmReportRewards => {
+  const raw =
+    value && typeof value === "object"
+      ? (value as Record<string, unknown>)
+      : null;
+  const awardedPoints =
+    raw && typeof raw.awardedPoints === "number" && Number.isFinite(raw.awardedPoints)
+      ? Math.trunc(raw.awardedPoints)
+      : null;
+  const pointsBalance =
+    raw && typeof raw.pointsBalance === "number" && Number.isFinite(raw.pointsBalance)
+      ? Math.trunc(raw.pointsBalance)
+      : null;
+  return { awardedPoints, pointsBalance };
+};
 
 export const confirmReport = async (reportId: string): Promise<ConfirmReportResult> => {
   if (getDevMockAccount()) {
-    return { ok: true };
+    return { ok: true, rewards: { awardedPoints: 1, pointsBalance: null } };
   }
 
   const authToken = await loadAuthToken();
@@ -338,5 +359,6 @@ export const confirmReport = async (reportId: string): Promise<ConfirmReportResu
   }
   if (!response.ok) return { ok: false, code: "unavailable" };
 
-  return { ok: true };
+  const payload = (await readJson(response)) as { rewards?: unknown } | null;
+  return { ok: true, rewards: parseConfirmRewards(payload?.rewards) };
 };

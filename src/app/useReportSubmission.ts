@@ -44,6 +44,7 @@ type UseReportSubmissionInput = {
   onReportSubmitted?: (result: {
     awardedPoints: number;
     pointsBalance: number | null;
+    reportId: string;
   }) => void;
 };
 
@@ -137,7 +138,10 @@ export const useReportSubmission = ({
               level,
             });
             if (result.rewards) {
-              onReportSubmitted?.(result.rewards);
+              onReportSubmitted?.({
+                ...result.rewards,
+                reportId: result.report.id,
+              });
             }
             return;
           }

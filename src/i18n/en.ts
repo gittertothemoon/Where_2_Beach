@@ -167,7 +167,7 @@ export const STRINGS = {
     tooFar: "You are too far to update here. Get closer to the beach.",
     remoteAllowed: "Remote update active. You can update from anywhere.",
     nearEnough: "You are near the beach. You can update.",
-    tooSoon: "You updated recently. Try again in a few minutes.",
+    tooSoon: "You updated recently. You can submit again in about an hour — we'll send a reminder.",
     accountRequired: "You need to sign in or register to update the map.",
     submitFailed: "Could not save the update. Please try again.",
     feedUnavailable: "Report data unavailable. Please try again later.",
@@ -399,6 +399,9 @@ export const STRINGS = {
     validationYes: "Yes, confirm",
     validationNo: "No longer",
     confirmationCount: (n: number) => n === 1 ? "1 confirmation" : `${n} confirmations`,
+    thanksToastTitle: "Thanks for confirming!",
+    thanksToastPoints: (pts: number) => `+${pts} pt`,
+    thanksToastBalance: (balance: number) => `Balance: ${balance} pt`,
   },
   achievements: {
     first_report: { name: "First Wave", description: "You sent your first report", hint: "Send your first report" },

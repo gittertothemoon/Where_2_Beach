@@ -68,6 +68,7 @@ import {
 import { normalizeSearchText } from "../lib/search";
 import { fetchBeachReviews, submitBeachReview } from "../lib/reviews";
 import { confirmReport } from "../lib/reports";
+import { loadOwnReportIds, rememberOwnReportId } from "../lib/ownReports";
 import type {
   BeachWithStats,
   CrowdLevel,
@@ -225,8 +226,12 @@ function App() {
   const rewardsSummaryRef = useRef<AccountRewardsSummary | null>(null);
   const confirmedReportIdsRef = useRef<Set<string>>(new Set());
   const validationDismissedIdsRef = useRef<Set<string>>(new Set());
+  const ownReportIdsRef = useRef<Set<string>>(loadOwnReportIds());
   const [reportThanksOpen, setReportThanksOpen] = useState(false);
   const [lastReportReward, setLastReportReward] = useState<{ awardedPoints: number; newBalance: number | null } | null>(null);
+  const [confirmRewardToast, setConfirmRewardToast] = useState<
+    { awardedPoints: number; newBalance: number | null } | null
+  >(null);
   const [reportsFeedReady, setReportsFeedReady] = useState(false);
   const [showLimitedDataNotice, setShowLimitedDataNotice] = useState(false);
   const [debugToast, setDebugToast] = useState<string | null>(null);
@@ -750,6 +755,12 @@ function App() {
   }, [missionReadyToast]);
 
   useEffect(() => {
+    if (!confirmRewardToast) return;
+    const timeout = window.setTimeout(() => setConfirmRewardToast(null), 4000);
+    return () => window.clearTimeout(timeout);
+  }, [confirmRewardToast]);
+
+  useEffect(() => {
     if (!debugToast) return;
     const timeout = window.setTimeout(() => {
       setDebugToast(null);
@@ -986,10 +997,12 @@ function App() {
   const latestBeachReport = selectedBeachId
     ? (reportsIndex.get(selectedBeachId)?.[0] ?? null)
     : null;
-  // Report is "confirmable" when: exists, user is logged in, not already confirmed this session
+  // Report is "confirmable" when: exists, user is logged in, not already confirmed this session,
+  // and not authored by this user (the backend rejects self-confirmation; hide the button too).
   const confirmableReportId = useMemo(() => {
     if (!latestBeachReport || !account || !isLidoModalOpen) return null;
     if (confirmedReportIdsRef.current.has(latestBeachReport.id)) return null;
+    if (ownReportIdsRef.current.has(latestBeachReport.id)) return null;
     return latestBeachReport.id;
   }, [latestBeachReport, account, isLidoModalOpen]);
   // Feature 5B: show "È ancora così?" when modal is open with a report >30 min old
@@ -1050,7 +1063,12 @@ function App() {
     setNow,
     setReportOpen,
     setReportThanksOpen,
-    onReportSubmitted: ({ awardedPoints, pointsBalance }) => {
+    onReportSubmitted: ({ awardedPoints, pointsBalance, reportId }) => {
+      ownReportIdsRef.current = new Set([
+        ...ownReportIdsRef.current,
+        reportId,
+      ]);
+      rememberOwnReportId(reportId);
       if (devMockAccount) {
         // Update in-memory mock first so balance is correct in both the modal and refresh
         awardMockPoints(awardedPoints);
@@ -1617,9 +1635,22 @@ function App() {
     async (reportId: string) => {
       confirmedReportIdsRef.current = new Set([...confirmedReportIdsRef.current, reportId]);
       validationDismissedIdsRef.current = new Set([...validationDismissedIdsRef.current, reportId]);
-      await confirmReport(reportId);
+      const result = await confirmReport(reportId);
+      if (result.ok) {
+        const awarded = result.rewards.awardedPoints ?? 1;
+        if (devMockAccount) {
+          awardMockPoints(awarded);
+          setConfirmRewardToast({ awardedPoints: awarded, newBalance: getMockBalance() });
+        } else {
+          setConfirmRewardToast({
+            awardedPoints: awarded,
+            newBalance: result.rewards.pointsBalance ?? null,
+          });
+        }
+        void refreshRewards({ silent: true, detectAchievements: true });
+      }
     },
-    [],
+    [devMockAccount, refreshRewards],
   );
 
   const handleValidateDismiss = useCallback(() => {
@@ -1790,6 +1821,24 @@ function App() {
           <span>{STRINGS.account.missionReadyToastTitle}</span>
           <span className="text-amber-200/80">{STRINGS.account.missionReadyToastAction}</span>
         </button>
+      ) : null}
+      {confirmRewardToast ? (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed left-1/2 top-[calc(env(safe-area-inset-top)+180px)] z-40 -translate-x-1/2 flex items-center gap-2 rounded-xl border border-emerald-300/55 bg-emerald-800/55 px-4 py-2.5 text-[12px] font-semibold text-emerald-50 shadow-[0_14px_30px_rgba(0,0,0,0.45)] backdrop-blur-md"
+        >
+          <span>✅</span>
+          <span>{STRINGS.confirm.thanksToastTitle}</span>
+          <span className="text-emerald-200">
+            {STRINGS.confirm.thanksToastPoints(confirmRewardToast.awardedPoints)}
+          </span>
+          {typeof confirmRewardToast.newBalance === "number" ? (
+            <span className="text-emerald-200/80">
+              · {STRINGS.confirm.thanksToastBalance(confirmRewardToast.newBalance)}
+            </span>
+          ) : null}
+        </div>
       ) : null}
 
       {accountRequiredOpen ? (

@@ -168,7 +168,7 @@ export const STRINGS = {
     remoteAllowed:
       "Aggiornamento da remoto attivo. Puoi aggiornare anche se lontano.",
     nearEnough: "Sei vicino alla spiaggia. Puoi aggiornare.",
-    tooSoon: "Hai già aggiornato di recente. Riprova tra qualche minuto.",
+    tooSoon: "Hai già aggiornato di recente. Puoi inviare una nuova segnalazione tra circa un'ora — ti avvisiamo noi quando puoi.",
     accountRequired: "Per aggiornare la mappa devi accedere o registrarti.",
     submitFailed:
       "Non riesco a salvare l'aggiornamento ora. Riprova tra poco.",
@@ -421,6 +421,9 @@ export const STRINGS = {
     validationYes: "Sì, confermo",
     validationNo: "Non più",
     confirmationCount: (n: number) => n === 1 ? "1 conferma" : `${n} conferme`,
+    thanksToastTitle: "Grazie per la conferma!",
+    thanksToastPoints: (pts: number) => `+${pts} pt`,
+    thanksToastBalance: (balance: number) => `Saldo: ${balance} pt`,
   },
   achievements: {
     first_report: { name: "Prima Onda", description: "Hai inviato la tua prima segnalazione", hint: "Invia la tua prima segnalazione" },
