@@ -1,7 +1,9 @@
 /* ===== Base ===== */
+html, body {
+    overflow-x: clip;
+}
 body {
     background-color: #FDFBF7;
-    overflow-x: hidden;
 }
 
 /* ===== Immersive Sequence ===== */
