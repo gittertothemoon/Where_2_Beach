@@ -23,13 +23,14 @@
     <link rel="preload" as="image" href="/sequence/frame_0.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
     <link rel="preload" as="image" href="/sequence/mobile/frame_0.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
     <!-- Preload hero app screenshot (LCP candidate) -->
-    <link rel="preload" as="image" href="app-ui-mobile.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="app-ui-mobile-540.webp" type="image/webp" fetchpriority="high" media="(max-width: 1023px)" imagesrcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w" imagesizes="(max-width: 640px) 256px, 320px">
+    <link rel="preload" as="image" href="app-ui-mobile.webp" type="image/webp" fetchpriority="high" media="(min-width: 1024px)">
 
-    <!-- Google Fonts: Poppins (3 weights) -->
+    <!-- Google Fonts: Poppins (3 weights), loaded non-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
-        rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"></noscript>
 
     <!-- Tailwind CSS (built statically) -->
     <link rel="stylesheet" href="tailwind.css">
@@ -174,7 +175,7 @@
                     <div class="phone-mockup-wrap">
                         <div class="phone-mockup w-[16rem] sm:w-[18rem] lg:w-[20rem] aspect-[9/19]">
                             <span class="phone-mockup-buttons" aria-hidden="true"></span>
-                            <img src="app-ui-mobile.webp" alt="Where2Beach app screenshot" loading="eager" fetchpriority="high" width="540" height="1140">
+                            <img src="app-ui-mobile-540.webp" srcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w, app-ui-mobile.webp 1320w" sizes="(max-width: 640px) 256px, (max-width: 1023px) 288px, 320px" alt="Where2Beach app screenshot" loading="eager" fetchpriority="high" width="540" height="1140">
                         </div>
                         <span class="phone-mockup-floor" aria-hidden="true"></span>
                         <span class="phone-mockup-badge" aria-hidden="true">
@@ -648,7 +649,7 @@
                 <div class="reveal-left relative mx-auto w-[280px] md:w-[320px] order-2 lg:order-1 mt-12 lg:mt-0">
                     <div class="phone-mockup aspect-[9/19]">
                         <span class="phone-mockup-buttons" aria-hidden="true"></span>
-                        <img src="app-ui-mobile.webp" alt="Where2Beach App Screen" loading="lazy">
+                        <img src="app-ui-mobile-540.webp" srcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w, app-ui-mobile.webp 1320w" sizes="(max-width: 640px) 256px, (max-width: 1023px) 288px, 320px" alt="Where2Beach App Screen" loading="lazy" width="540" height="1140">
                     </div>
                     <span class="phone-mockup-floor" aria-hidden="true"></span>
 
