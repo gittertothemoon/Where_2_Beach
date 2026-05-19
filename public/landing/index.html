@@ -23,21 +23,16 @@
     <link rel="preload" as="image" href="/sequence/frame_0.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
     <link rel="preload" as="image" href="/sequence/mobile/frame_0.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
 
-    <!-- Google Fonts: Poppins for a modern, rounded, friendly look -->
+    <!-- Google Fonts: Poppins (3 weights) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
         rel="stylesheet">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Configuration -->
-    <script src="tailwind.config.js"></script>
-    <script src="/legal/runtime.js" defer></script>
-
-
+    <!-- Tailwind CSS (built statically) -->
+    <link rel="stylesheet" href="tailwind.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="/legal/runtime.js" defer></script>
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -65,7 +60,7 @@
                     <a href="#hero" class="text-2xl font-black tracking-tighter text-white flex items-center gap-2 group"
                         id="logo-text">
                         <div class="relative flex items-center justify-center">
-                            <img src="W2B_Logo.png" alt="Where2Beach Logo"
+                            <img src="W2B_Logo.webp" alt="Where2Beach Logo"
                                 class="h-24 w-auto transform group-hover:scale-110 transition-transform duration-300">
                         </div>
                     </a>
@@ -176,7 +171,7 @@
                     <div class="phone-mockup-wrap">
                         <div class="phone-mockup w-[16rem] sm:w-[18rem] lg:w-[20rem] aspect-[9/19]">
                             <span class="phone-mockup-buttons" aria-hidden="true"></span>
-                            <img src="app-ui-mobile.jpg" alt="Where2Beach app screenshot" loading="eager">
+                            <img src="app-ui-mobile.webp" alt="Where2Beach app screenshot" loading="eager">
                         </div>
                         <span class="phone-mockup-floor" aria-hidden="true"></span>
                         <span class="phone-mockup-badge" aria-hidden="true">
@@ -650,7 +645,7 @@
                 <div class="reveal-left relative mx-auto w-[280px] md:w-[320px] order-2 lg:order-1 mt-12 lg:mt-0">
                     <div class="phone-mockup aspect-[9/19]">
                         <span class="phone-mockup-buttons" aria-hidden="true"></span>
-                        <img src="app-ui-mobile.jpg" alt="Where2Beach App Screen" loading="lazy">
+                        <img src="app-ui-mobile.webp" alt="Where2Beach App Screen" loading="lazy">
                     </div>
                     <span class="phone-mockup-floor" aria-hidden="true"></span>
 
@@ -1089,7 +1084,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-8 border-b border-gray-800 pb-12">
                 <!-- Brand -->
                 <div class="flex items-center gap-3 text-white font-black text-2xl tracking-tighter">
-                    <img src="W2B_Logo.png" alt="Where2Beach Logo" class="h-20 w-auto">
+                    <img src="W2B_Logo.webp" alt="Where2Beach Logo" class="h-20 w-auto">
                 </div>
 
                 <!-- Social & Contact -->
@@ -1141,7 +1136,7 @@
             }
         })(window, document);
     </script>
-    <script type="text/javascript" src="https://embeds.iubenda.com/widgets/0d71235e-61c2-48bd-8249-cb23a0e08060.js"></script>
+    <script type="text/javascript" src="https://embeds.iubenda.com/widgets/0d71235e-61c2-48bd-8249-cb23a0e08060.js" defer></script>
 
     <!-- Interactive JS -->
     <script src="scripts.js"></script>
