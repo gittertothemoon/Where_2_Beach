@@ -411,7 +411,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const pad = 32 * pxRatio;
                 const boxWidth = canvas.width - pad * 2;
                 const boxHeight = canvas.height - topInset - pad * 2;
-                const fit = Math.min(boxWidth / image.width, boxHeight / image.height);
+                // 0.78: the scene reads as an object on a dark stage, not a wall.
+                const fit = Math.min(boxWidth / image.width, boxHeight / image.height) * 0.78;
                 drawWidth = image.width * fit;
                 drawHeight = image.height * fit;
                 offsetX = (canvas.width - drawWidth) / 2;
