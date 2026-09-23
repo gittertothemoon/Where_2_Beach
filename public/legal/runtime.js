@@ -198,8 +198,16 @@
     document.head.appendChild(script);
   }
 
+  function hasIubendaWidget() {
+    return !!document.querySelector('script[src*="embeds.iubenda.com/widgets/"]');
+  }
+
   function initIubenda(config) {
     if (isNativeShellContext()) return;
+    // The landing ships iubenda's all-in-one widget, which already installs the
+    // cookie solution: loading a second one here doubled the scripts and the
+    // consent setup (and pulled an autoblocking script the account doesn't use).
+    if (hasIubendaWidget()) return;
 
     var iubendaConfig = config.iubenda;
     if (!iubendaConfig) return;

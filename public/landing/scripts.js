@@ -2,35 +2,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.cookie = 'br_seen_landing=1; Path=/; Max-Age=2592000; SameSite=Lax';
 
     const navbar = document.getElementById('navbar');
-    const link1 = document.getElementById('link-1');
-    const link2 = document.getElementById('link-2');
-    const link3 = document.getElementById('link-3');
-    const link4 = document.getElementById('link-4');
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
     // ===== Navbar Scroll Effect =====
+    // Colours live in styles.css: here we only say whether the bar is scrolled
+    // and whether a dark section sits under it.
+    const darkSections = [...document.querySelectorAll('[data-nav-theme="dark"]')];
+    let navTicking = false;
+    const updateNavbar = () => {
+        navTicking = false;
+        const scrolled = window.scrollY > 50;
+        const probe = navbar.getBoundingClientRect().bottom - 1;
+        const overDark = darkSections.some((section) => {
+            const rect = section.getBoundingClientRect();
+            return rect.top <= probe && rect.bottom > probe;
+        });
+        navbar.classList.toggle('glass-nav', scrolled);
+        navbar.classList.toggle('is-scrolled', scrolled);
+        navbar.classList.toggle('is-over-dark', scrolled && overDark);
+        navbar.classList.toggle('py-5', !scrolled);
+        navbar.classList.toggle('py-3', scrolled);
+    };
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('glass-nav');
-            navbar.classList.remove('py-5');
-            navbar.classList.add('py-3');
-            link1?.classList.remove('text-white'); link1?.classList.add('text-gray-600', 'hover:text-corallo');
-            link2?.classList.remove('text-white'); link2?.classList.add('text-gray-600', 'hover:text-corallo');
-            link3?.classList.remove('text-white'); link3?.classList.add('text-gray-600', 'hover:text-corallo');
-            link4?.classList.remove('text-white'); link4?.classList.add('text-gray-600', 'hover:text-corallo');
-            mobileBtn?.classList.remove('text-white'); mobileBtn?.classList.add('text-gray-900');
-        } else {
-            navbar.classList.remove('glass-nav');
-            navbar.classList.add('py-5');
-            navbar.classList.remove('py-3');
-            link1?.classList.add('text-white'); link1?.classList.remove('text-gray-600', 'hover:text-corallo');
-            link2?.classList.add('text-white'); link2?.classList.remove('text-gray-600', 'hover:text-corallo');
-            link3?.classList.add('text-white'); link3?.classList.remove('text-gray-600', 'hover:text-corallo');
-            link4?.classList.add('text-white'); link4?.classList.remove('text-gray-600', 'hover:text-corallo');
-            mobileBtn?.classList.add('text-white'); mobileBtn?.classList.remove('text-gray-900');
-        }
-    });
+        if (navTicking) return;
+        navTicking = true;
+        window.requestAnimationFrame(updateNavbar);
+    }, { passive: true });
+    updateNavbar();
 
     // ===== Mobile Menu =====
     mobileBtn?.addEventListener('click', () => {
@@ -167,17 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const diff = summer - now;
 
         if (diff <= 0) {
-            const el = document.getElementById('summer-countdown');
-            if (el) {
-                el.textContent = '';
-                const icon = document.createElement('span');
-                icon.className = 'text-lg';
-                icon.textContent = '☀️';
-                const text = document.createElement('span');
-                text.className = 'text-sm font-bold text-corallo';
-                text.textContent = "L'estate è arrivata! La lista prioritaria è aperta.";
-                el.append(icon, text);
-            }
+            // Summer has started: the countdown has nothing left to say.
+            document.getElementById('summer-countdown')?.remove();
+            window.clearInterval(countdownTimer);
             return;
         }
 
@@ -197,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
     }
 
+    const countdownTimer = window.setInterval(updateCountdown, 1000);
     updateCountdown();
-    setInterval(updateCountdown, 1000);
 
     const initRadarSequence = () => {
         const stage = document.getElementById('radar-sequence-stage');
@@ -358,11 +349,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 node.style.opacity = opacity.toFixed(3);
-                node.style.transform = `translate3d(0, ${y}px, 0)`;
+                // Move only the copy: the scrim stays anchored to the stage edge.
+                const copy = node.querySelector('.sequence-beat-inner') || node;
+                copy.style.transform = `translate3d(0, ${y}px, 0)`;
             });
 
             if (indicator) {
-                indicator.style.opacity = (1 - clamp01(currentProgress / 0.1)).toFixed(3);
+                indicator.style.opacity = (1 - clamp01(currentProgress / 0.03)).toFixed(3);
             }
         };
 
@@ -382,7 +375,14 @@ document.addEventListener('DOMContentLoaded', () => {
             );
             if (!image) return;
 
-            const drawKey = `${isMobileView ? 'm' : 'd'}-${index}-${canvas.width}x${canvas.height}`;
+            // Desktop frames are composed edge to edge: fit them below the fixed
+            // navbar with some air instead of letting it crop the top.
+            const pxRatio = canvas.width / Math.max(1, canvas.clientWidth);
+            const navEl = document.getElementById('navbar');
+            const topInset = !isMobileView && navEl
+                ? Math.round(Math.max(0, navEl.getBoundingClientRect().bottom) * pxRatio)
+                : 0;
+            const drawKey = `${isMobileView ? 'm' : 'd'}-${index}-${canvas.width}x${canvas.height}-${topInset}`;
             if (!resized && drawKey === lastDrawKey) return;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -407,19 +407,37 @@ document.addEventListener('DOMContentLoaded', () => {
                     offsetX = 0;
                     offsetY = (canvas.height - drawHeight) / 2;
                 }
-            } else if (imageAspect > canvasAspect) {
-                drawWidth = canvas.width;
-                drawHeight = canvas.width / imageAspect;
-                offsetX = 0;
-                offsetY = (canvas.height - drawHeight) / 2;
             } else {
-                drawHeight = canvas.height;
-                drawWidth = canvas.height * imageAspect;
+                const pad = 32 * pxRatio;
+                const boxWidth = canvas.width - pad * 2;
+                const boxHeight = canvas.height - topInset - pad * 2;
+                const fit = Math.min(boxWidth / image.width, boxHeight / image.height);
+                drawWidth = image.width * fit;
+                drawHeight = image.height * fit;
                 offsetX = (canvas.width - drawWidth) / 2;
-                offsetY = 0;
+                offsetY = topInset + pad + (boxHeight - drawHeight) / 2;
             }
 
             ctx.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
+
+            if (!isMobileView) {
+                // Feather the frame edges into the section background so the
+                // smaller frame reads as part of the stage, not as a pasted box.
+                const feather = Math.round(Math.min(drawWidth, drawHeight) * 0.06);
+                const edges = [
+                    [offsetX, 0, offsetX + feather, 0, offsetX, offsetY, feather, drawHeight],
+                    [offsetX + drawWidth, 0, offsetX + drawWidth - feather, 0, offsetX + drawWidth - feather, offsetY, feather, drawHeight],
+                    [0, offsetY, 0, offsetY + feather, offsetX, offsetY, drawWidth, feather],
+                    [0, offsetY + drawHeight, 0, offsetY + drawHeight - feather, offsetX, offsetY + drawHeight - feather, drawWidth, feather],
+                ];
+                edges.forEach(([x0, y0, x1, y1, x, y, w, h]) => {
+                    const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
+                    gradient.addColorStop(0, 'rgba(0, 0, 6, 1)');
+                    gradient.addColorStop(1, 'rgba(0, 0, 6, 0)');
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(x, y, w, h);
+                });
+            }
             lastDrawKey = drawKey;
         };
 
@@ -614,7 +632,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, {
             threshold: 0.01,
-            rootMargin: '300px 0px',
+            // Start well ahead: the first frame is no longer preloaded in <head>.
+            rootMargin: '1000px 0px',
         });
         activationObserver.observe(stage);
     };

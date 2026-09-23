@@ -7,52 +7,57 @@ body {
 }
 
 /* ===== Immersive Sequence ===== */
+/* Each beat spans the whole stage so its scrim fades together with the copy;
+   the scrim keeps the text legible over any frame without hiding the subject. */
 .sequence-beat {
     position: absolute;
-    top: 50%;
+    inset: 0;
     display: flex;
-    width: 100%;
     flex-direction: column;
     justify-content: center;
+    padding: 0 5vw;
     opacity: 0;
-    transform: translate3d(0, 20px, 0);
-    transition: opacity 120ms linear, transform 120ms linear;
-    will-change: opacity, transform;
+    will-change: opacity;
 }
 
 .sequence-beat-left {
-    left: 0;
     align-items: flex-start;
+    text-align: left;
+    background: linear-gradient(90deg, rgba(0, 0, 6, 0.82) 0%, rgba(0, 0, 6, 0.55) 32%, rgba(0, 0, 6, 0) 58%);
 }
 
 .sequence-beat-right {
-    right: 0;
     align-items: flex-end;
+    text-align: right;
+    background: linear-gradient(270deg, rgba(0, 0, 6, 0.82) 0%, rgba(0, 0, 6, 0.55) 32%, rgba(0, 0, 6, 0) 58%);
 }
 
-.sequence-beat-center {
-    left: 0;
-    align-items: center;
+.sequence-beat-inner {
+    display: flex;
+    max-width: min(30vw, 30rem);
+    flex-direction: column;
+    align-items: inherit;
+    will-change: transform;
 }
 
 .sequence-beat-title {
     margin: 0 0 1rem;
-    max-width: 11ch;
-    font-size: clamp(2.35rem, 8vw, 6rem);
+    font-size: clamp(2.35rem, 4.2vw, 4.5rem);
     font-weight: 900;
     line-height: 0.94;
-    letter-spacing: -0.06em;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9), 0 4px 40px rgba(0, 0, 0, 0.7), 0 0 8px rgba(0, 0, 0, 1);
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+    text-shadow: 0 2px 24px rgba(0, 0, 6, 0.7);
 }
 
 .sequence-beat-subtitle {
     margin: 0;
-    max-width: 32rem;
-    font-size: clamp(1rem, 2.2vw, 1.55rem);
+    font-size: clamp(1rem, 1.35vw, 1.25rem);
     font-weight: 600;
-    line-height: 1.35;
-    color: rgba(255, 255, 255, 0.94);
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 1);
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    text-wrap: pretty;
+    text-shadow: 0 1px 12px rgba(0, 0, 6, 0.8);
 }
 
 .sequence-indicator-bar {
@@ -68,30 +73,25 @@ body {
     }
 }
 
-@media (min-width: 768px) {
-    .sequence-beat-left {
-        left: 6rem;
-        width: auto;
-    }
-
-    .sequence-beat-right {
-        right: 6rem;
-        width: auto;
-    }
-}
-
 @media (max-width: 767px) {
+    /* On phones the subject fills the frame: the copy reads like a subtitle
+       at the bottom, over a scrim that rises from the edge. */
     .sequence-beat-left,
-    .sequence-beat-right,
-    .sequence-beat-center {
-        left: 0;
-        right: 0;
+    .sequence-beat-right {
+        justify-content: flex-end;
         align-items: center;
+        padding: 0 1.5rem calc(env(safe-area-inset-bottom, 0px) + 3.5rem);
         text-align: center;
+        background: linear-gradient(0deg, rgba(0, 0, 6, 0.92) 0%, rgba(0, 0, 6, 0.7) 30%, rgba(0, 0, 6, 0) 56%);
+    }
+
+    .sequence-beat-inner {
+        max-width: 22rem;
     }
 
     .sequence-beat-title {
-        max-width: 13ch;
+        margin-bottom: 0.75rem;
+        font-size: clamp(2.1rem, 10vw, 2.75rem);
     }
 }
 
@@ -102,6 +102,44 @@ body {
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 20px -1px rgba(0, 0, 0, 0.05);
+}
+
+#navbar .nav-logo {
+    height: 4.5rem;
+    transition: height 300ms ease, transform 300ms ease;
+}
+
+#navbar.is-scrolled .nav-logo {
+    height: 3.5rem;
+}
+
+#navbar.is-scrolled .nav-link {
+    color: #4B5563;
+}
+
+#navbar.is-scrolled .nav-link:hover {
+    color: #FF7B54;
+}
+
+#navbar.is-scrolled #mobile-menu-btn {
+    color: #111827;
+}
+
+/* Over the hero, the radar sequence, the waitlist and the footer the light
+   glass turned into a muddy grey band: switch to a dark glass instead. */
+#navbar.is-over-dark {
+    background: rgba(0, 18, 32, 0.62);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.4);
+}
+
+#navbar.is-over-dark .nav-link,
+#navbar.is-over-dark #mobile-menu-btn {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+#navbar.is-over-dark .nav-link:hover {
+    color: #90E0EF;
 }
 
 /* ===== Hero Gradient ===== */
@@ -139,11 +177,12 @@ body {
 }
 
 .w2b-icon-tile > svg {
-    width: 70%;
-    height: 70%;
+    width: 46%;
+    height: 46%;
     position: relative;
     z-index: 1;
-    filter: drop-shadow(0 1px 1px rgba(0, 31, 61, 0.08));
+    color: #004B7A;
+    stroke-width: 1.5;
 }
 
 /* ===== Hero Background ===== */
@@ -358,6 +397,14 @@ body {
 @keyframes phone-float {
     0%, 100% { transform: rotate(-2deg) translateY(0); }
     50% { transform: rotate(-2deg) translateY(-8px); }
+}
+
+/* The phone used to be a fixed 20rem wide (~675px tall): on laptop screens it
+   climbed under the navbar. Tie its size to the viewport height instead. */
+@media (min-width: 768px) {
+    .phone-mockup-wrap .phone-mockup {
+        width: clamp(14rem, calc((100svh - 17rem) * 9 / 19), 20rem);
+    }
 }
 
 /* Floor shadow / reflection puddle */

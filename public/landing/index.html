@@ -19,12 +19,9 @@
     <meta name="twitter:description" content="Scarica Where2Beach su App Store. Affollamento, meteo e segnalazioni live della community.">
     <meta name="twitter:image" content="https://where2beach.com/og/og-default.jpg">
 
-    <!-- Preload first radar-sequence frame so it is on the wire before scripts.js parses -->
-    <link rel="preload" as="image" href="/sequence/frame_0.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
-    <link rel="preload" as="image" href="/sequence/mobile/frame_0.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
-    <!-- Preload hero app screenshot (LCP candidate) -->
-    <link rel="preload" as="image" href="app-ui-mobile-540.webp" type="image/webp" fetchpriority="high" media="(max-width: 1023px)" imagesrcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w" imagesizes="(max-width: 640px) 256px, 320px">
-    <link rel="preload" as="image" href="app-ui-mobile.webp" type="image/webp" fetchpriority="high" media="(min-width: 1024px)">
+    <!-- Preload hero app screenshot (LCP candidate). Same srcset/sizes as the <img>:
+         otherwise the browser preloads one candidate and downloads another. -->
+    <link rel="preload" as="image" type="image/webp" fetchpriority="high" imagesrcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w, app-ui-mobile-800.webp 800w, app-ui-mobile.webp 1320w" imagesizes="(max-width: 640px) 256px, (max-width: 1023px) 288px, 320px">
 
     <!-- Google Fonts: Poppins (3 weights), loaded non-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,19 +61,19 @@
                         id="logo-text">
                         <div class="relative flex items-center justify-center">
                             <img src="W2B_Logo.webp" alt="Where2Beach Logo"
-                                class="h-24 w-auto transform group-hover:scale-110 transition-transform duration-300">
+                                class="nav-logo h-24 w-auto transform group-hover:scale-110 transition-transform duration-300">
                         </div>
                     </a>
                 </div>
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#community" class="text-white font-medium hover:text-onda transition-colors"
+                    <a href="#community" class="nav-link text-white font-medium hover:text-onda transition-colors"
                         id="link-1">La Community</a>
-                    <a href="#features" class="text-white font-medium hover:text-onda transition-colors"
+                    <a href="#features" class="nav-link text-white font-medium hover:text-onda transition-colors"
                         id="link-2">Cosa Offriamo</a>
-                    <a href="#how-it-works" class="text-white font-medium hover:text-onda transition-colors"
+                    <a href="#how-it-works" class="nav-link text-white font-medium hover:text-onda transition-colors"
                         id="link-3">Come Funziona</a>
-                    <a href="#partners" class="text-white/80 font-medium hover:text-onda transition-colors" id="link-4">Per aziende</a>
+                    <a href="#partners" class="nav-link text-white font-medium hover:text-onda transition-colors" id="link-4">Per aziende</a>
                     <a href="https://apps.apple.com/it/app/where2beach/id6760668956"
                         target="_blank" rel="noopener noreferrer"
                         data-cta-id="nav_store_ios"
@@ -89,10 +86,9 @@
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center z-10">
                     <button id="mobile-menu-btn" class="text-white focus:outline-none p-2" aria-label="Apri menu" aria-controls="mobile-menu" aria-expanded="false">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" /></svg>
                     </button>
                 </div>
             </div>
@@ -118,7 +114,7 @@
 
     <main>
     <!-- Hero Section -->
-    <section id="hero" class="hero-bg relative min-h-[100svh] flex items-center pt-28 md:pt-32 pb-16 md:pb-24 overflow-hidden">
+    <section id="hero" data-nav-theme="dark" class="hero-bg relative min-h-[100svh] flex items-center pt-28 md:pt-36 pb-16 md:pb-24 overflow-hidden">
         <!-- Mesh gradient blobs -->
         <div class="hero-mesh hero-mesh-1" aria-hidden="true"></div>
         <div class="hero-mesh hero-mesh-2" aria-hidden="true"></div>
@@ -175,7 +171,7 @@
                     <div class="phone-mockup-wrap">
                         <div class="phone-mockup w-[16rem] sm:w-[18rem] lg:w-[20rem] aspect-[9/19]">
                             <span class="phone-mockup-buttons" aria-hidden="true"></span>
-                            <img src="app-ui-mobile-540.webp" srcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w, app-ui-mobile.webp 1320w" sizes="(max-width: 640px) 256px, (max-width: 1023px) 288px, 320px" alt="Where2Beach app screenshot" loading="eager" fetchpriority="high" width="540" height="1140">
+                            <img src="app-ui-mobile-540.webp" srcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w, app-ui-mobile-800.webp 800w, app-ui-mobile.webp 1320w" sizes="(max-width: 640px) 256px, (max-width: 1023px) 288px, 320px" alt="Where2Beach app screenshot" loading="eager" fetchpriority="high" width="540" height="1140">
                         </div>
                         <span class="phone-mockup-floor" aria-hidden="true"></span>
                         <span class="phone-mockup-badge" aria-hidden="true">
@@ -254,7 +250,7 @@
     </section>
 
     <!-- Stats / Problem Statement -->
-    <section class="py-16 md:py-24 bg-sabbia text-center px-4 relative z-20">
+    <section class="pt-10 pb-16 md:pt-12 md:pb-20 bg-sabbia text-center px-4 relative z-20">
         <div
             class="reveal-scale max-w-5xl mx-auto bg-white/70 backdrop-blur-3xl rounded-[2.5rem] shadow-soft p-8 md:p-14">
             <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 tracking-tighter">Il paradosso del turista
@@ -283,10 +279,11 @@
 
     <!-- Social Proof Strip -->
     <section class="py-8 bg-white border-b border-gray-100">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-sm font-semibold text-gray-500">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-wrap lg:flex-nowrap items-center justify-center gap-6 md:gap-8 text-sm font-semibold text-gray-500 lg:whitespace-nowrap">
                 <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4 text-corallo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <svg class="w-4 h-4 text-corallo flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" /></svg>
                     <span>Già attivo lungo tutta la costa italiana</span>
                 </div>
                 <div class="w-px h-4 bg-gray-200 hidden md:block"></div>
@@ -296,12 +293,15 @@
                 </div>
                 <div class="w-px h-4 bg-gray-200 hidden md:block"></div>
                 <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4 text-corallo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+                    <svg class="w-4 h-4 text-corallo flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" />
+  <path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" />
+  <path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5" />
+  <rect x="3" y="7" width="18" height="4" rx="1" /></svg>
                     <span>Premi reali per chi segnala</span>
                 </div>
                 <div class="w-px h-4 bg-gray-200 hidden md:block"></div>
                 <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4 text-corallo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <svg class="w-4 h-4 text-corallo flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8" /></svg>
                     <span>Gratis, per sempre</span>
                 </div>
             </div>
@@ -309,7 +309,7 @@
     </section>
 
     <!-- Value Proposition — Why Where2Beach -->
-    <section class="py-20 md:py-32 bg-white relative overflow-hidden">
+    <section class="pt-20 pb-16 md:pt-24 md:pb-20 bg-white relative overflow-hidden">
         <!-- Subtle decorative blobs -->
         <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-onda/5 rounded-full blur-[100px]"></div>
         <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-corallo/5 rounded-full blur-[100px]"></div>
@@ -333,17 +333,9 @@
                 <div class="reveal stagger-1 group relative bg-gradient-to-br from-white to-gray-50/80 rounded-[2.5rem] p-8 md:p-10 border border-gray-100 hover:border-mare/30 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-2 text-center">
                     <div class="absolute top-6 right-6 text-6xl md:text-7xl font-black text-gray-100 group-hover:text-mare/10 transition-colors select-none">1</div>
                     <div class="w2b-icon-tile mx-auto mb-6 group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-300">
-                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                            <path d="M6 14L18 10L30 14L42 10V34L30 38L18 34L6 38V14Z" fill="#90E0EF"/>
-                            <path d="M6 14L18 10L30 14L42 10V34L30 38L18 34L6 38V14Z" stroke="#0077B6" stroke-width="1.6" stroke-linejoin="round"/>
-                            <path d="M18 10V34M30 14V38" stroke="#0077B6" stroke-width="1" stroke-dasharray="2 2" opacity="0.55"/>
-                            <ellipse cx="24" cy="38" rx="6" ry="1.6" fill="#000" opacity="0.18"/>
-                            <path d="M24 12C19.3 12 15.5 15.8 15.5 20.5C15.5 26.5 24 36 24 36C24 36 32.5 26.5 32.5 20.5C32.5 15.8 28.7 12 24 12Z" fill="#FF6B47"/>
-                            <path d="M24 12C19.3 12 15.5 15.8 15.5 20.5C15.5 26.5 24 36 24 36C24 36 32.5 26.5 32.5 20.5C32.5 15.8 28.7 12 24 12Z" stroke="#C8421F" stroke-width="1.4" stroke-linejoin="round"/>
-                            <path d="M24 12C19.3 12 15.5 15.8 15.5 20.5C18 17 21 16 24 16C24 16 24 13.5 24 12Z" fill="white" opacity="0.25"/>
-                            <circle cx="24" cy="20" r="3.4" fill="white"/>
-                            <circle cx="24" cy="20" r="3.4" stroke="#C8421F" stroke-width="1"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
+  <path d="M15 5.764v15" />
+  <path d="M9 3.236v15" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 tracking-tight mb-3">Cerca la tua spiaggia</h3>
                     <p class="text-gray-500 font-medium leading-relaxed text-sm md:text-base">Apri l'app, cerca la spiaggia dove vuoi andare o esplora quelle vicine a te sulla mappa.</p>
@@ -353,17 +345,8 @@
                 <div class="reveal stagger-2 group relative bg-gradient-to-br from-white to-gray-50/80 rounded-[2.5rem] p-8 md:p-10 border border-gray-100 hover:border-corallo/30 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-2 text-center">
                     <div class="absolute top-6 right-6 text-6xl md:text-7xl font-black text-gray-100 group-hover:text-corallo/10 transition-colors select-none">2</div>
                     <div class="w2b-icon-tile mx-auto mb-6 group-hover:scale-105 group-hover:rotate-2 transition-transform duration-300">
-                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                            <rect x="11" y="5" width="26" height="38" rx="5.5" fill="#023E8A"/>
-                            <rect x="11" y="5" width="26" height="38" rx="5.5" stroke="#001F3D" stroke-width="1.4"/>
-                            <rect x="13.5" y="9.5" width="21" height="29" rx="2.5" fill="#90E0EF"/>
-                            <rect x="20.5" y="6.5" width="7" height="2" rx="1" fill="#001F3D"/>
-                            <circle cx="24" cy="24" r="11" fill="#FF6B47" opacity="0.18"/>
-                            <circle cx="24" cy="24" r="7.5" fill="#FF6B47" opacity="0.32"/>
-                            <circle cx="24" cy="24" r="4" fill="#FF6B47"/>
-                            <circle cx="24" cy="24" r="4" stroke="#C8421F" stroke-width="1.2"/>
-                            <circle cx="22.5" cy="22.5" r="1.2" fill="white" opacity="0.7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+  <path d="M12 18h.01" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 tracking-tight mb-3">Guarda com'è adesso</h3>
                     <p class="text-gray-500 font-medium leading-relaxed text-sm md:text-base">Vedi in tempo reale quanto è affollata, com'è il meteo, se ci sono meduse o problemi di parcheggio.</p>
@@ -373,25 +356,14 @@
                 <div class="reveal stagger-3 group relative bg-gradient-to-br from-white to-gray-50/80 rounded-[2.5rem] p-8 md:p-10 border border-gray-100 hover:border-mare/30 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-2 text-center">
                     <div class="absolute top-6 right-6 text-6xl md:text-7xl font-black text-gray-100 group-hover:text-mare/10 transition-colors select-none">3</div>
                     <div class="w2b-icon-tile mx-auto mb-6 group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-300">
-                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                            <circle cx="34" cy="14" r="7.5" fill="#FFD93D"/>
-                            <circle cx="34" cy="14" r="7.5" stroke="#E0A21B" stroke-width="1.2"/>
-                            <g stroke="#E0A21B" stroke-width="1.4" stroke-linecap="round">
-                                <path d="M34 3.5v2"/>
-                                <path d="M34 22.5v2"/>
-                                <path d="M22.5 14h2"/>
-                                <path d="M43.5 14h2"/>
-                                <path d="M26.5 6.5l1.5 1.5"/>
-                                <path d="M40 20l1.5 1.5"/>
-                            </g>
-                            <ellipse cx="24" cy="40" rx="14" ry="2" fill="#000" opacity="0.15"/>
-                            <path d="M24 10C13 10 6 21 6 25H42C42 21 35 10 24 10Z" fill="#FF6B47"/>
-                            <path d="M24 10C13 10 6 21 6 25H42C42 21 35 10 24 10Z" stroke="#C8421F" stroke-width="1.5" stroke-linejoin="round"/>
-                            <path d="M14 25C14 19 18 13 24 13M34 25C34 19 30 13 24 13" stroke="#C8421F" stroke-width="1.1" opacity="0.45"/>
-                            <path d="M24 13C16 13 11 19 8 25H40C37 19 32 13 24 13Z" fill="white" opacity="0.18"/>
-                            <rect x="22.7" y="25" width="2.6" height="14" rx="0.8" fill="#7C2D12"/>
-                            <path d="M4 39C8 37 12 37 16 39C20 41 24 41 28 39C32 37 36 37 40 39C42 40 44 40 44 39" stroke="#0077B6" stroke-width="2.2" stroke-linecap="round"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v8" />
+  <path d="m4.93 10.93 1.41 1.41" />
+  <path d="M2 18h2" />
+  <path d="M20 18h2" />
+  <path d="m19.07 10.93-1.41 1.41" />
+  <path d="M22 22H2" />
+  <path d="m8 6 4-4 4 4" />
+  <path d="M16 18a4 4 0 0 0-8 0" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 tracking-tight mb-3">Goditi la giornata</h3>
                     <p class="text-gray-500 font-medium leading-relaxed text-sm md:text-base">Parti solo quando ne vale la pena. Niente stress, niente sorprese. Solo mare perfetto.</p>
@@ -409,12 +381,12 @@
     </section>
 
     <!-- Community Section — Segnala & Aiuta -->
-    <section id="community" class="py-20 md:py-32 bg-gradient-to-b from-white via-sabbia to-sabbia relative overflow-hidden">
+    <section id="community" class="pt-12 pb-20 md:pt-16 md:pb-28 bg-gradient-to-b from-white via-sabbia to-sabbia relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
                 
                 <!-- Left — Emotional Copy -->
-                <div class="reveal-left">
+                <div class="reveal-left lg:sticky lg:top-28">
                     <h2 class="text-sm text-corallo font-bold tracking-widest uppercase mb-3">La forza della community</h2>
                     <p class="text-3xl md:text-5xl font-black tracking-tighter text-gray-900 leading-[1.1] mb-6">
                         Tu segnali.<br>
@@ -437,7 +409,10 @@
                     <!-- Card 1 — Guadagna (differenziatore principale, in cima) -->
                     <div class="group bg-gradient-to-br from-amber-50 to-white rounded-[2rem] p-6 md:p-8 shadow-soft border border-amber-100 hover:border-amber-300/40 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg flex items-start gap-5">
                         <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FFB154] to-corallo text-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" />
+  <path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" />
+  <path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5" />
+  <rect x="3" y="7" width="18" height="4" rx="1" /></svg>
                         </div>
                         <div>
                             <div class="inline-flex items-center gap-1.5 mb-2 bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">Esclusivo</div>
@@ -462,7 +437,9 @@
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-corallo via-[#FFB154] to-corallo opacity-60 group-hover:opacity-100 transition-opacity"></div>
                         <div class="flex items-start gap-5 mb-6">
                             <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-corallo to-corallo-hover text-white flex items-center justify-center shadow-md shadow-corallo/20 group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+  <path d="M8 6v8" /></svg>
                             </div>
                             <div>
                                 <h3 class="text-lg font-bold text-gray-900 tracking-tight mb-1">Segnala in 5 secondi</h3>
@@ -473,54 +450,41 @@
                         <div class="signal-badges-grid pl-0 md:pl-[4.75rem]">
                             <span class="signal-badge signal-badge--coral" style="--badge-delay: 0s">
                                 <span class="signal-badge-glyph">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <circle cx="8" cy="7" r="2.6" fill="currentColor"/>
-                                        <path d="M3.5 17c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5v1H3.5v-1z" fill="currentColor"/>
-                                        <circle cx="16" cy="7" r="2.6" fill="currentColor" opacity="0.55"/>
-                                        <path d="M11.5 17c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5v1h-9v-1z" fill="currentColor" opacity="0.55"/>
-                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" /></svg>
                                 </span>
                                 <span>Affollamento</span>
                             </span>
                             <span class="signal-badge signal-badge--purple" style="--badge-delay: 0.06s">
                                 <span class="signal-badge-glyph">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <path d="M5 11C5 7 8 4 12 4s7 3 7 7v2H5v-2z" fill="currentColor"/>
-                                        <path d="M5 13c1.2 0 1.2 1.6 2.4 1.6S8.6 13 9.8 13s1.2 1.6 2.4 1.6S13.4 13 14.6 13s1.2 1.6 2.4 1.6S18.2 13 19 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7"/>
-                                        <path d="M8 16l-1 4M11 16v4M13 16v4M16 16l1 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
-                                        <circle cx="9.5" cy="9" r="0.9" fill="white" opacity="0.9"/>
-                                        <circle cx="14" cy="9" r="0.9" fill="white" opacity="0.9"/>
-                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 0 1 15 0Z"/><path d="M8.5 14.5c-1 1.6 1 3 0 5M12 14.5c-1 2 1 3.6 0 6.5M15.5 14.5c-1 1.6 1 3 0 5"/></svg>
                                 </span>
                                 <span>Meduse</span>
                             </span>
                             <span class="signal-badge signal-badge--cyan" style="--badge-delay: 0.12s">
                                 <span class="signal-badge-glyph">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <path d="M2 11c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                        <path d="M2 16c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
-                                        <path d="M2 21c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
-                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" />
+  <path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" />
+  <path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" /></svg>
                                 </span>
                                 <span>Mare mosso</span>
                             </span>
                             <span class="signal-badge signal-badge--teal" style="--badge-delay: 0.18s">
                                 <span class="signal-badge-glyph">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <path d="M3 9h11a3 3 0 100-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                        <path d="M3 15h15a3.5 3.5 0 110 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                        <path d="M3 12h7" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
-                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.8 19.6A2 2 0 1 0 14 16H2" />
+  <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" />
+  <path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></svg>
                                 </span>
                                 <span>Vento</span>
                             </span>
                             <span class="signal-badge signal-badge--green" style="--badge-delay: 0.24s">
                                 <span class="signal-badge-glyph">
-                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" fill="currentColor"/>
-                                        <path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z" fill="currentColor" opacity="0.6"/>
-                                        <path d="M6 17l.6 1.6L8.2 19l-1.6.6L6 21l-.6-1.4L4 19l1.4-.4L6 17z" fill="currentColor" opacity="0.5"/>
-                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" /></svg>
                                 </span>
                                 <span>Pulizia</span>
                             </span>
@@ -530,7 +494,10 @@
                     <!-- Card 3 — Aiuta -->
                     <div class="group bg-white rounded-[2rem] p-6 md:p-8 shadow-soft border border-gray-100 hover:border-mare/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg flex items-start gap-5">
                         <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-mare to-mare-dark text-white flex items-center justify-center shadow-md group-hover:scale-110 group-hover:-rotate-3 transition-transform">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" /></svg>
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-gray-900 tracking-tight mb-1">Aiuta chi sta partendo ora</h3>
@@ -564,16 +531,9 @@
                         class="absolute top-0 right-0 w-32 h-32 bg-onda/10 rounded-bl-full -z-10 group-hover:bg-onda/20 transition-colors">
                     </div>
                     <div class="w2b-icon-tile mb-6">
-                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                            <ellipse cx="24" cy="40" rx="14" ry="2.4" stroke="#0077B6" stroke-width="1.4" stroke-dasharray="3 2.5" opacity="0.5" fill="none"/>
-                            <ellipse cx="24" cy="40" rx="8" ry="1.4" fill="#0077B6" opacity="0.3"/>
-                            <path d="M24 4C17 4 11.5 9.5 11.5 16.5C11.5 26 24 40 24 40C24 40 36.5 26 36.5 16.5C36.5 9.5 31 4 24 4Z" fill="#FF6B47"/>
-                            <path d="M24 4C17 4 11.5 9.5 11.5 16.5C11.5 26 24 40 24 40C24 40 36.5 26 36.5 16.5C36.5 9.5 31 4 24 4Z" stroke="#C8421F" stroke-width="1.5" stroke-linejoin="round"/>
-                            <path d="M24 4C17 4 11.5 9.5 11.5 16.5C14 11 18 9 24 9C24 9 24 6 24 4Z" fill="white" opacity="0.25"/>
-                            <circle cx="24" cy="16.5" r="5" fill="white"/>
-                            <circle cx="24" cy="16.5" r="5" stroke="#C8421F" stroke-width="1.2"/>
-                            <circle cx="24" cy="16.5" r="2.2" fill="#FF6B47"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8c0 3.613-3.869 7.429-5.393 8.795a1 1 0 0 1-1.214 0C9.87 15.429 6 11.613 6 8a6 6 0 0 1 12 0" />
+  <circle cx="12" cy="8" r="2" />
+  <path d="M8.714 14h-3.71a1 1 0 0 0-.948.683l-2.004 6A1 1 0 0 0 3 22h18a1 1 0 0 0 .948-1.316l-2-6a1 1 0 0 0-.949-.684h-3.712" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 tracking-tighter">Mappe & Segnalazioni</h3>
                     <p class="text-gray-600 leading-relaxed font-medium">
@@ -589,17 +549,7 @@
                         class="absolute top-0 right-0 w-32 h-32 bg-corallo/10 rounded-bl-full -z-10 group-hover:bg-corallo/20 transition-colors">
                     </div>
                     <div class="w2b-icon-tile mb-6">
-                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                            <circle cx="24" cy="24" r="20" fill="#FFD93D" opacity="0.35"/>
-                            <circle cx="24" cy="24" r="14.5" fill="#FFB154" opacity="0.55"/>
-                            <circle cx="24" cy="24" r="9" fill="#FF6B47" opacity="0.85"/>
-                            <circle cx="24" cy="24" r="4" fill="#C8421F"/>
-                            <circle cx="24" cy="24" r="4" stroke="white" stroke-width="1.2"/>
-                            <path d="M21 17C19 12 14 11 11 14" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.6" fill="none"/>
-                            <circle cx="11" cy="14" r="1.3" fill="white" opacity="0.7"/>
-                            <path d="M27 31C29 36 34 37 37 34" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.6" fill="none"/>
-                            <circle cx="37" cy="34" r="1.3" fill="white" opacity="0.7"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 tracking-tighter">Heatmaps Predittive</h3>
                     <p class="text-gray-600 leading-relaxed font-medium">
@@ -615,14 +565,8 @@
                         class="absolute top-0 right-0 w-32 h-32 bg-mare-dark/5 rounded-bl-full -z-10 group-hover:bg-mare-dark/10 transition-colors">
                     </div>
                     <div class="w2b-icon-tile mb-6">
-                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                            <path d="M24 4L40 9.5V22C40 32.5 32.5 40 24 42C15.5 40 8 32.5 8 22V9.5L24 4Z" fill="#0077B6"/>
-                            <path d="M24 4L40 9.5V22C40 32.5 32.5 40 24 42C15.5 40 8 32.5 8 22V9.5L24 4Z" stroke="#001F3D" stroke-width="1.5" stroke-linejoin="round"/>
-                            <path d="M24 7.5L36.5 11.5V22C36.5 30.5 30.5 36.5 24 38.2V7.5Z" fill="#023E8A" opacity="0.7"/>
-                            <path d="M24 4L40 9.5V22C40 32.5 32.5 40 24 42V4Z" fill="white" opacity="0.08"/>
-                            <path d="M16 23L22 29L33 18" stroke="#FFD93D" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16 23L22 29L33 18" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 tracking-tighter">Dati verificati dalla community</h3>
                     <p class="text-gray-600 leading-relaxed font-medium">
@@ -649,7 +593,7 @@
                 <div class="reveal-left relative mx-auto w-[280px] md:w-[320px] order-2 lg:order-1 mt-12 lg:mt-0">
                     <div class="phone-mockup aspect-[9/19]">
                         <span class="phone-mockup-buttons" aria-hidden="true"></span>
-                        <img src="app-ui-mobile-540.webp" srcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w, app-ui-mobile.webp 1320w" sizes="(max-width: 640px) 256px, (max-width: 1023px) 288px, 320px" alt="Where2Beach App Screen" loading="lazy" width="540" height="1140">
+                        <img src="app-ui-mobile-540.webp" srcset="app-ui-mobile-360.webp 360w, app-ui-mobile-540.webp 540w, app-ui-mobile-800.webp 800w, app-ui-mobile.webp 1320w" sizes="(max-width: 640px) 256px, (max-width: 1023px) 288px, 320px" alt="Where2Beach App Screen" loading="lazy" width="540" height="1140">
                     </div>
                     <span class="phone-mockup-floor" aria-hidden="true"></span>
 
@@ -657,23 +601,16 @@
                     <div class="absolute top-1/4 -left-8 md:-left-16 bg-white/90 backdrop-blur px-4 py-3 rounded-2xl shadow-xl border border-gray-100 animate-float text-sm font-bold flex items-center gap-3 z-30"
                         style="animation-delay: 0.5s;">
                         <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" /></svg>
                         </div>
                         <span class="text-gray-800">Posto Trovato!</span>
                     </div>
                     <div class="absolute bottom-1/3 -right-6 md:-right-12 bg-white/90 backdrop-blur px-4 py-3 rounded-2xl shadow-xl border border-gray-100 animate-float text-sm font-bold flex items-center gap-3 z-30"
                         style="animation-delay: 1.2s;">
                         <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+  <path d="m16 9-5.5 5.5L8 12" /></svg>
                         </div>
                         <div class="flex flex-col">
                             <span class="text-gray-800 text-xs">Info Validata</span>
@@ -697,10 +634,10 @@
                         <li class="flex items-start group">
                             <div
                                 class="flex-shrink-0 w-12 h-12 rounded-2xl bg-corallo-light flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
-                                <svg class="w-6 h-6 text-corallo" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
+                                <svg class="w-6 h-6 text-corallo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+  <circle cx="7" cy="17" r="2" />
+  <path d="M9 17h6" />
+  <circle cx="17" cy="17" r="2" /></svg>
                             </div>
                             <div>
                                 <strong class="text-gray-900 text-lg">Evita viaggi a vuoto</strong>
@@ -712,11 +649,15 @@
                         <li class="flex items-start group">
                             <div
                                 class="flex-shrink-0 w-12 h-12 rounded-2xl bg-onda/30 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
-                                <svg class="w-6 h-6 text-mare" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4">
-                                    </path>
-                                </svg>
+                                <svg class="w-6 h-6 text-mare" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4" />
+  <path d="M14 13.12c0 2.38 0 6.38-1 8.88" />
+  <path d="M17.29 21.02c.12-.6.43-2.3.5-3.02" />
+  <path d="M2 12a10 10 0 0 1 18-6" />
+  <path d="M2 16h.01" />
+  <path d="M21.8 16c.2-2 .131-5.354 0-6" />
+  <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2" />
+  <path d="M8.65 22c.21-.66.45-1.32.57-2" />
+  <path d="M9 6.8a6 6 0 0 1 9 5.2v2" /></svg>
                             </div>
                             <div>
                                 <strong class="text-gray-900 text-lg">Filtri Anti-Frode</strong>
@@ -727,12 +668,12 @@
                         <li class="flex items-start group">
                             <div
                                 class="flex-shrink-0 w-12 h-12 rounded-2xl bg-yellow-100 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
-                                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                    </path>
-                                </svg>
+                                <svg class="w-6 h-6 text-yellow-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2" />
+  <path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2" />
+  <path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3" />
+  <path d="M4 22h16" />
+  <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+  <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" /></svg>
                             </div>
                             <div>
                                 <strong class="text-gray-900 text-lg">Gamification & Rewards</strong>
@@ -748,7 +689,7 @@
     </section>
 
     <!-- Immersive Sequence Intro -->
-    <section id="radar-sequence" class="relative bg-[#000006] text-white">
+    <section id="radar-sequence" data-nav-theme="dark" class="relative bg-[#000006] text-white">
         <div id="radar-sequence-stage" class="relative h-[400svh] md:h-[400vh]">
             <div id="radar-sequence-loader" class="absolute inset-0 z-[60] transition-opacity duration-500">
                 <div class="sticky top-0 flex h-[100svh] w-full flex-col items-center justify-center bg-[#000006]">
@@ -769,25 +710,29 @@
                 <div class="absolute inset-0 bg-gradient-to-b from-[#000006]/18 via-transparent to-[#000006]/58"></div>
 
                 <div id="radar-sequence-copy" class="absolute inset-0">
-                    <div data-sequence-beat data-range="0,0.1,0.15,0.25"
-                        class="sequence-beat sequence-beat-center px-6 text-center">
-                        <h2 class="sequence-beat-title">LA SPIAGGIA PERFETTA ESISTE.</h2>
-                        <p class="sequence-beat-subtitle">Smetti di perdere tempo. Scopri dove andare prima di partire.</p>
+                    <div data-sequence-beat data-range="0,0.05,0.15,0.21" class="sequence-beat sequence-beat-left">
+                        <div class="sequence-beat-inner">
+                            <h2 class="sequence-beat-title">LA SPIAGGIA PERFETTA ESISTE.</h2>
+                            <p class="sequence-beat-subtitle">Smetti di perdere tempo. Scopri dove andare prima di partire.</p>
+                        </div>
                     </div>
-                    <div data-sequence-beat data-range="0.25,0.35,0.45,0.55"
-                        class="sequence-beat sequence-beat-left px-6 text-left">
-                        <h2 class="sequence-beat-title">DATI IN TEMPO REALE</h2>
-                        <p class="sequence-beat-subtitle">Vento, onde, affollamento e meteo: tutto aggiornato al secondo.</p>
+                    <div data-sequence-beat data-range="0.27,0.33,0.44,0.5" class="sequence-beat sequence-beat-right">
+                        <div class="sequence-beat-inner">
+                            <h2 class="sequence-beat-title">DATI IN TEMPO REALE</h2>
+                            <p class="sequence-beat-subtitle">Vento, onde, affollamento e meteo: tutto aggiornato al secondo.</p>
+                        </div>
                     </div>
-                    <div data-sequence-beat data-range="0.5,0.6,0.7,0.8"
-                        class="sequence-beat sequence-beat-right px-6 text-right">
-                        <h2 class="sequence-beat-title">ZERO SORPRESE</h2>
-                        <p class="sequence-beat-subtitle">Scegli la spiaggia giusta al primo colpo. Ogni volta.</p>
+                    <div data-sequence-beat data-range="0.55,0.61,0.71,0.77" class="sequence-beat sequence-beat-left">
+                        <div class="sequence-beat-inner">
+                            <h2 class="sequence-beat-title">ZERO SORPRESE</h2>
+                            <p class="sequence-beat-subtitle">Scegli la spiaggia giusta al primo colpo. Ogni volta.</p>
+                        </div>
                     </div>
-                    <div data-sequence-beat data-range="0.75,0.85,1,1"
-                        class="sequence-beat sequence-beat-center px-6 text-center">
-                        <h2 class="sequence-beat-title">LA TUA ESTATE, SENZA SORPRESE</h2>
-                        <p class="sequence-beat-subtitle">Scarica l'app. Gratis, per sempre.</p>
+                    <div data-sequence-beat data-range="0.82,0.88,1,1" class="sequence-beat sequence-beat-right">
+                        <div class="sequence-beat-inner">
+                            <h2 class="sequence-beat-title">LA TUA ESTATE, SENZA SORPRESE</h2>
+                            <p class="sequence-beat-subtitle">Scarica l'app. Gratis, per sempre.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -800,11 +745,11 @@
                 </div>
             </div>
         </div>
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-sabbia"></div>
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24" style="background: linear-gradient(to bottom, rgba(0, 53, 83, 0), #003553);"></div>
     </section>
 
     <!-- Waitlist CTA Section — moved before B2B -->
-    <section id="waitlist" class="py-24 bg-gradient-to-br from-[#003553] via-mare-dark to-[#001f3f] relative overflow-hidden">
+    <section id="waitlist" data-nav-theme="dark" class="py-24 bg-gradient-to-br from-[#003553] via-mare-dark to-[#001f3f] relative overflow-hidden">
         <div id="download" class="hidden" aria-hidden="true"></div>
         <div class="absolute top-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-corallo/20 rounded-full blur-[100px] md:blur-[120px] mix-blend-screen animate-blob z-0"></div>
         <div class="absolute -bottom-1/4 left-1/4 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-onda/20 rounded-full blur-[120px] md:blur-[150px] mix-blend-screen animate-blob z-0" style="animation-delay: 2s;"></div>
@@ -881,11 +826,9 @@
                     class="reveal stagger-1 card-glow bg-white/90 backdrop-blur-sm p-10 rounded-[2.5rem] shadow-sm hover:shadow-soft transition-all duration-500 border border-gray-100 group hover:-translate-y-2">
                     <div
                         class="w-14 h-14 rounded-[1.5rem] bg-corallo/10 flex items-center justify-center mb-6 text-corallo shadow-sm drop-shadow-sm">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                            </path>
-                        </svg>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-4 tracking-tight">Lead Generation per i Lidi</h3>
                     <p class="text-gray-600 mb-6 text-sm leading-relaxed">
@@ -894,17 +837,9 @@
                     </p>
                     <ul class="text-sm font-medium text-gray-700 space-y-3">
                         <li class="flex items-center"><span
-                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg
-                                    class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg></span> Badge "Top Partner"</li>
+                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span> Badge "Top Partner"</li>
                         <li class="flex items-center"><span
-                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg
-                                    class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg></span> Visibilità premium</li>
+                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span> Visibilità premium</li>
                     </ul>
                 </div>
 
@@ -914,11 +849,8 @@
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-mare to-onda"></div>
                     <div
                         class="w-14 h-14 rounded-[1.5rem] bg-mare/10 flex items-center justify-center mb-6 text-mare shadow-sm drop-shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                            </path>
-                        </svg>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6" />
+  <path d="m22 7-8.5 8.5-5-5L2 17" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-4 tracking-tight">Dashboard SaaS per Enti</h3>
                     <p class="text-gray-600 mb-6 text-sm leading-relaxed">
@@ -927,17 +859,9 @@
                     </p>
                     <ul class="text-sm font-medium text-gray-700 space-y-3">
                         <li class="flex items-center"><span
-                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg
-                                    class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg></span> Integrazioni Smart City</li>
+                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span> Integrazioni Smart City</li>
                         <li class="flex items-center"><span
-                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg
-                                    class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg></span> Previsioni a 7 giorni</li>
+                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span> Previsioni a 7 giorni</li>
                     </ul>
                 </div>
 
@@ -946,11 +870,9 @@
                     class="reveal stagger-3 card-glow bg-white/90 backdrop-blur-sm p-10 rounded-[2.5rem] shadow-sm hover:shadow-soft transition-all duration-500 border border-gray-100 group hover:-translate-y-2">
                     <div
                         class="w-14 h-14 rounded-[1.5rem] bg-gray-900/5 flex items-center justify-center mb-6 text-gray-900 shadow-sm drop-shadow-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                            </path>
-                        </svg>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="16" r="1" />
+  <rect x="3" y="10" width="18" height="12" rx="2" />
+  <path d="M7 10V7a5 5 0 0 1 10 0v3" /></svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-4 tracking-tight">Trust & Transparency</h3>
                     <p class="text-gray-600 mb-6 text-sm leading-relaxed">
@@ -959,17 +881,9 @@
                     </p>
                     <ul class="text-sm font-medium text-gray-700 space-y-3">
                         <li class="flex items-center"><span
-                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg
-                                    class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg></span> Tracciamento passivo</li>
+                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span> Tracciamento passivo</li>
                         <li class="flex items-center"><span
-                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg
-                                    class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg></span> Reconciliation automatica</li>
+                                class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span> Reconciliation automatica</li>
                     </ul>
                 </div>
             </div>
@@ -1085,7 +999,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#0A1118] text-gray-400 py-16">
+    <footer data-nav-theme="dark" class="bg-[#0A1118] text-gray-400 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8 border-b border-gray-800 pb-12">
                 <!-- Brand -->
@@ -1095,14 +1009,6 @@
 
                 <!-- Social & Contact -->
                 <div class="flex items-center space-x-6">
-                    <a href="https://www.instagram.com/Where2Beach" target="_blank" rel="noopener noreferrer"
-                        class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-corallo hover:text-white transition-all">
-                        <span class="sr-only">Instagram</span>
-                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                        </svg>
-                    </a>
                     <a href="https://www.tiktok.com/@where2beach" target="_blank" rel="noopener noreferrer"
                         class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-black hover:text-white transition-all">
                         <span class="sr-only">TikTok</span>
