@@ -114,6 +114,23 @@ All feature flags are in `src/config/features.ts`, driven by `VITE_*` environmen
 - App gate redirect (no cookie → `/landing/`)
 - Cron: `POST /api/reports-prune` daily at 03:17 UTC
 
+## Landing (`public/landing/`) — state and traps (2026-09-23)
+
+The landing is shown as a case study on pionio.it; last pass on 23/09/2026 (`fd4ae83`, `312b765`).
+- `public/landing/tailwind.css` is **prebuilt**: after adding any Tailwind class, rebuild from the repo root with
+  `npx tailwindcss@3.4.17 -c public/landing/tailwind.landing.config.cjs -o public/landing/tailwind.css --minify`,
+  or the class simply does not exist.
+- Local preview with live reload: `npx live-server@1.2.2 public --port=5180 --host=0.0.0.0` (root must be `public/`,
+  the page uses absolute paths like `/sequence/`).
+- iubenda: the landing ships the all-in-one **widget** only; `public/legal/runtime.js` skips its own cookie solution
+  when that widget is on the page (other pages still use the runtime). The iubenda warning badge is an account-side
+  issue, not code.
+- Navbar colours live in `styles.css` (`is-scrolled`, `is-over-dark` + `data-nav-theme="dark"` on dark sections);
+  the script only toggles state.
+- Radar sequence: desktop frames are fitted below `#navbar` at 78% with feathered edges (`drawFrame` in `scripts.js`);
+  beats are full-stage with an edge scrim, bottom subtitles on phones.
+- Icons: one Lucide set, inline SVG (the jellyfish is hand-drawn on the 24 grid).
+
 ## Key Docs
 
 - `docs/repo_map.md` — module boundaries and conventions
